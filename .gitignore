@@ -1,0 +1,20 @@
+# 运行时产物
+chaos_history.json
+chaos_dataset.csv
+quick_test_result.csv
+final_dataset_for_algorithm.csv
+chaos_metrics/
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+
+# 临时文件
+*.tmp
+*.swp
+~$*
+
+# IDE
+.vscode/
+.idea/
