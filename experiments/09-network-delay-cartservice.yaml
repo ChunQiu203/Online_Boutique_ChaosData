@@ -1,0 +1,18 @@
+apiVersion: chaos-mesh.org/v1alpha1
+kind: NetworkChaos
+metadata:
+  name: network-delay-cartservice
+  namespace: chaos-testing
+spec:
+  action: delay
+  mode: all
+  duration: "600s"
+  selector:
+    namespaces:
+      - default
+    labelSelectors:
+      app: cartservice
+  delay:
+    latency: "500ms"
+    jitter: "100ms"
+  direction: both

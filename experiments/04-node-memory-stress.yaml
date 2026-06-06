@@ -1,0 +1,16 @@
+apiVersion: chaos-mesh.org/v1alpha1
+kind: NodeChaos
+metadata:
+  name: node-memory-stress
+  namespace: chaos-testing
+spec:
+  action: stress
+  mode: one
+  selector:
+    nodeSelectors:
+      kubernetes.io/hostname: minikube
+  stressors:
+    memory:
+      workers: 1
+      size: "1G"
+  duration: "600s"

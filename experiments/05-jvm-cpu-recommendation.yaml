@@ -1,0 +1,14 @@
+apiVersion: chaos-mesh.org/v1alpha1
+kind: JvmChaos
+metadata:
+  name: jvm-cpu-recommendation
+  namespace: chaos-testing
+spec:
+  selector:
+    labelSelectors:
+      app: recommendationservice
+  action: cpu
+  cpu:
+    load: 80
+    workers: 2
+  duration: "600s"

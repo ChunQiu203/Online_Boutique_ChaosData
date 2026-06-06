@@ -1,0 +1,16 @@
+apiVersion: chaos-mesh.org/v1alpha1
+kind: NetworkChaos
+metadata:
+  name: network-corrupt-productcatalog
+  namespace: chaos-testing
+spec:
+  action: corrupt
+  mode: one
+  selector:
+    labelSelectors:
+      app: productcatalogservice
+  corrupt:
+    corrupt: "10"
+    correlation: "0"
+  direction: Both
+  duration: "600s"

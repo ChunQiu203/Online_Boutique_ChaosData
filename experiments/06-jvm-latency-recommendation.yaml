@@ -1,0 +1,14 @@
+apiVersion: chaos-mesh.org/v1alpha1
+kind: JvmChaos
+metadata:
+  name: jvm-latency-recommendation
+  namespace: chaos-testing
+spec:
+  selector:
+    labelSelectors:
+      app: recommendationservice
+  action: latency
+  latency:
+    delay: "200ms"
+    percent: 100
+  duration: "600s"

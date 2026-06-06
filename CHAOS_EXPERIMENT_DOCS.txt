@@ -1,0 +1,430 @@
+================================================================================
+  全自动化混沌工程故障注入与监控采集系统 —— 完整流程文档
+================================================================================
+
+版本: v2 (多服务多指标宽矩阵版)
+日期: 2026-06-06
+
+--------------------------------------------------------------------------------
+目录
+--------------------------------------------------------------------------------
+  1. 系统概述
+  2. 环境与前置条件
+  3. 故障矩阵 (Fault Matrix)
+  4. 单次实验生命周期
+  5. 全量实验排期与总耗时
+  6. Prometheus 指标采集
+  7. 数据合并、对齐与打标
+  8. 输出文件
+  9. 使用方法
+ 10. 关键设计决策
+
+================================================================================
+1. 系统概述
+================================================================================
+
+本系统实现了一个闭环的全自动化混沌工程实验流水线:
+
+  故障注入 (ChaosMesh)                  数据采集 (Prometheus)
+       │                                      │
+       ├─ 5大类 × 11种故障                     ├─ 11个微服务 × 7项黄金指标
+       ├─ 每种故障重复 5 次                    ├─ + 3 项系统全局指标 = 80 路 PromQL
+       ├─ 单次: 静默60s + 持续10min + 冷却20min  ├─ Range Query API, step=15s
+       │                                      │
+       └──────────┬───────────────────────────┘
+                  │
+          chaos_history.json    全量宽矩阵 CSV
+          (55条故障元数据)      (~6840行 × 82列, 带标签)
+
+================================================================================
+2. 环境与前置条件
+================================================================================
+
+硬件/集群:
+  - 本地 Minikube 集群 (单节点)
+  - Kubernetes v1.x
+
+已部署组件:
+  - Online Boutique 微服务系统 (11个服务, default 命名空间)
+  - ChaosMesh (chaos-testing 命名空间)
+  - Prometheus (monitoring 命名空间, 端口转发至 localhost:9090)
+  - JMeter 持续压测流量 (模拟用户日常请求, 确保故障注入时产生黄金指标波动)
+
+Python 环境:
+  - Python 3.8+
+  - 依赖: requests, pandas, numpy, pyyaml
+
+================================================================================
+3. 故障矩阵 (Fault Matrix)
+================================================================================
+
+共计 5 大类、11 种具体故障类型:
+
+┌─────────────────┬──────────────────────┬──────────────────────────┬──────────────────────┐
+│ 故障大类          │ 故障类型               │ 目标服务/节点              │ ChaosMesh Kind       │
+├─────────────────┼──────────────────────┼──────────────────────────┼──────────────────────┤
+│ stress test     │ cpu stress           │ cartservice              │ StressChaos          │
+│ (压力测试)       │ memory stress        │ emailservice             │ StressChaos          │
+├─────────────────┼──────────────────────┼──────────────────────────┼──────────────────────┤
+│ network attack  │ network corrupt      │ productcatalogservice    │ NetworkChaos         │
+│ (网络攻击)       │ network delay        │ cartservice              │ NetworkChaos         │
+│                 │ network loss         │ checkoutservice          │ NetworkChaos         │
+├─────────────────┼──────────────────────┼──────────────────────────┼──────────────────────┤
+│ pod fault       │ pod failure          │ checkoutservice          │ PodChaos             │
+│ (Pod故障)        │ pod kill            │ frontend                 │ PodChaos             │
+├─────────────────┼──────────────────────┼──────────────────────────┼──────────────────────┤
+│ node fault      │ node memory stress   │ minikube (节点)           │ NodeChaos            │
+│ (节点故障)       │ node cpu stress      │ minikube (节点)           │ NodeChaos            │
+├─────────────────┼──────────────────────┼──────────────────────────┼──────────────────────┤
+│ jvm fault       │ jvm cpu              │ recommendationservice    │ JvmChaos             │
+│ (JVM故障)        │ jvm latency          │ recommendationservice    │ JvmChaos             │
+└─────────────────┴──────────────────────┴──────────────────────────┴──────────────────────┘
+
+每种故障对应的 ChaosMesh YAML 文件位于:
+  deploy/chaos-experiments/01-pod-failure-checkout.yaml
+  deploy/chaos-experiments/02-network-corrupt-productcatalog.yaml
+  ...
+  deploy/chaos-experiments/11-pod-kill-frontend.yaml
+
+所有 YAML 的 duration 字段均已设置为 600s (10分钟), 与脚本的故障持续期一致。
+
+================================================================================
+4. 单次实验生命周期
+================================================================================
+
+每次故障注入实验分为 5 个阶段, 总耗时 31 分钟 (1860秒):
+
+  阶段 1 — 注入前静默期 (60s)
+  ├── 系统保持正常运行
+  ├── JMeter 持续施压
+  └── 目的: 建立故障前的性能基线
+
+  阶段 2 — 故障注入
+  ├── 执行: kubectl apply -f <对应故障.yaml>
+  ├── 成功后立即记录 start_time (UTC ISO 8601, 精确到秒)
+  │   例如: "2026-06-06T10:01:00Z"
+  └── ChaosMesh 开始对目标 Pod/节点施加故障
+
+  阶段 3 — 故障持续 (600s = 10分钟)
+  ├── 脚本静默等待
+  ├── 故障持续影响目标服务
+  ├── Prometheus 持续采集指标 (每15s一次 scrape)
+  └── JMeter 持续施压, 黄金指标应出现明显波动
+
+  阶段 4 — 故障解除
+  ├── 执行: kubectl delete -f <对应故障.yaml>
+  ├── 成功后立即记录 end_time (UTC ISO 8601, 精确到秒)
+  │   例如: "2026-06-06T10:11:00Z"
+  └── ChaosMesh 停止故障注入, 目标服务开始恢复
+
+  阶段 5 — 系统恢复期 (1200s = 20分钟)
+  ├── 脚本静默等待
+  ├── 微服务系统在压测下逐渐回稳
+  └── 目的: 确保下次实验开始前系统已彻底恢复正常
+
+时间线示意:
+  ┌──────┬────────────────────────┬──────┬────────────────────────────────────┐
+  │ 60s  │        600s            │ 修复  │              1200s                  │
+  │ 静默  │       故障持续          │ 瞬间  │             恢复期                   │
+  └──────┴────────────────────────┴──────┴────────────────────────────────────┘
+  T-60   T=start_time                       T=end_time                       T+1200
+         (注入成功)                          (解除成功)                       (下次实验)
+
+================================================================================
+5. 全量实验排期与总耗时
+================================================================================
+
+执行顺序:
+  外层循环: 遍历 5 个故障大类
+    内层循环: 遍历大类下的每种故障类型
+      最内层循环: 每种故障重复 5 次
+
+实验总数: 11 种故障 × 5 次 = 55 次实验
+
+单次实验耗时: 60s + 600s + 1200s = 1860s = 31 分钟
+
+总耗时估算: 55 × 31min = 1705min ≈ 28.4 小时 (~1.2 天)
+
+排期示例 (以 stress test 大类为例):
+  ┌─────────┬──────────────────┬──────────────┬──────────────┬──────────────┐
+  │ 重复 #   │ 故障              │ start_time   │ end_time     │ 阶段         │
+  ├─────────┼──────────────────┼──────────────┼──────────────┼──────────────┤
+  │ 1       │ cpu stress       │ 10:01        │ 10:11        │ 故障期       │
+  │         │ (cartservice)    │ 10:11        │ 10:31        │ 恢复期       │
+  │ 2       │ cpu stress       │ 10:31        │ 10:41        │ 故障期       │
+  │         │ (cartservice)    │ 10:41        │ 11:01        │ 恢复期       │
+  │ ...     │ ...              │ ...          │ ...          │ ...          │
+  │ 5       │ cpu stress       │ 12:31        │ 12:41        │ 故障期       │
+  │         │ (cartservice)    │ 12:41        │ 13:01        │ 恢复期       │
+  │ 1       │ memory stress    │ 13:01        │ 13:11        │ 故障期       │
+  │         │ (emailservice)   │ 13:11        │ 13:31        │ 恢复期       │
+  │ ...     │ ...              │ ...          │ ...          │ ...          │
+  └─────────┴──────────────────┴──────────────┴──────────────┴──────────────┘
+
+异常的容错:
+  - 单次 kubectl 失败: 记录失败, 跳过本轮, 继续下一轮 (不会终止整个大循环)
+  - SIGINT/SIGTERM 信号: 在当前实验完成后优雅退出
+  - 每次实验完成后立即写入 chaos_history.json, 防止中途崩溃丢失数据
+
+================================================================================
+6. Prometheus 指标采集
+================================================================================
+
+6.1 采集时机
+  全部 55 次实验执行完毕后, 一次性批量查询 Prometheus。
+
+6.2 查询范围
+  query_start = 最早一次实验的 start_time - 10 分钟
+  query_end   = 最晚一次实验的 end_time   + 10 分钟
+
+  前后各保留 10 分钟的正常基线数据。
+
+6.3 指标矩阵 (80 路 PromQL)
+  11 个微服务 × 7 项黄金指标 + 3 项系统全局指标:
+
+  每服务指标 (7项):
+  ┌──────────────────────┬──────────────────────────────────────────────────────┐
+  │ 指标                  │ PromQL 说明                                           │
+  ├──────────────────────┼──────────────────────────────────────────────────────┤
+  │ cpu_usage            │ sum(rate(container_cpu_usage_seconds_total{}[30s]))*100│
+  │ mem_usage_mb         │ sum(container_memory_working_set_bytes{}) / 1024 / 1024│
+  │ mem_usage_pct        │ 内存使用量 / resource_limits × 100                      │
+  │ grpc_latency_p99     │ histogram_quantile(0.99, rate(grpc_server_handling_    │
+  │                      │   seconds_bucket{}[30s]))                              │
+  │ grpc_error_rate      │ rate(grpc_server_handled_total{code!="OK"}[30s])       │
+  │                      │   / rate(grpc_server_handled_total{}[30s])             │
+  │ grpc_rps             │ sum(rate(grpc_server_handled_total{}[30s]))            │
+  │ pod_restarts         │ sum(kube_pod_container_status_restarts_total{})        │
+  └──────────────────────┴──────────────────────────────────────────────────────┘
+
+  系统全局指标 (3项):
+  ┌──────────────────────┬──────────────────────────────────────────────────────┐
+  │ system&total_rps     │ 系统总请求速率 (HTTP + gRPC)                           │
+  │ system&node_cpu_pct  │ 节点 CPU 使用率 (%)                                    │
+  │ system&node_mem_pct  │ 节点内存使用率 (%)                                     │
+  └──────────────────────┴──────────────────────────────────────────────────────┘
+
+6.4 采集参数
+  API:     GET /api/v1/query_range
+  Step:    15s (等于 Prometheus 默认 scrape_interval)
+  Rate窗口: 30s (≥ 2× step, 保证至少 2 个抓取点参与计算)
+
+6.5 标签匹配方式
+  默认使用 pod 标签匹配:  pod=~"<service>-.*"
+  可选 container 模式:    container=~".*<service>.*"
+  通过 --label-mode 参数切换。
+
+================================================================================
+7. 数据合并、对齐与打标
+================================================================================
+
+7.1 横向合并 (Wide Table Merge)
+  80 路 PromQL 查询各自返回一组时间序列。
+  每路序列先转为 pandas Series (以 UTC datetime 为索引, 同时刻多副本取均值)。
+  然后合并为单张 DataFrame:
+
+    pd.DataFrame(all_series).sort_index()
+
+  结果: 80 列宽表, 行索引为 Prometheus 原生时间戳。
+
+7.2 时间对齐 (Resampling)
+  不同 PromQL 查询返回的时间戳可能存在微小差异 (秒级偏移)。
+  使用统一的 15s 网格对齐:
+
+    df.resample("15s").mean()
+
+  每 15 秒一个桶, 桶内多条取平均值 (通常每桶只有 1 个真实抓取点)。
+  偶发的漏抓点使用 .ffill().bfill() 前向/后向填充。
+
+7.3 列名规范
+  所有数据列严格满足 <服务名>&<指标名> 格式:
+
+    frontend&cpu_usage
+    cartservice&mem_usage_mb
+    checkoutservice&grpc_latency_p99
+    system&node_cpu_pct
+    ...
+
+7.4 故障区间打标 (Labeling)
+  从 chaos_history.json 读取全部 55 条故障记录。
+  对每条记录, 找出 DataFrame 中 timestamp 落在 [start_time, end_time] 的所有行。
+  利用 pandas 布尔掩码批量赋值:
+
+    - fault_type:      默认 "normal" → 故障窗口内标记为具体类型 (如 "cpu_stress")
+    - target_service:  默认 "none"   → 故障窗口内标记为目标服务 (如 "cartservice")
+
+  重叠处理: 如果两次实验的时间窗口有重叠 (不应出现, 但容错处理),
+  后写入的标签覆盖先写入的标签。
+
+7.5 数据质量保证
+  - 不做插值: CSV 中每一行都对应 Prometheus 的一次真实物理抓取
+  - 不做噪声: 不添加任何合成数据
+  - 列级校验: 列名必须含 "&" 分隔符
+  - NaN 报告: 输出各列缺失值统计
+
+================================================================================
+8. 输出文件
+================================================================================
+
+8.1 chaos_history.json
+  位置: 项目根目录
+  格式: JSON 数组, 每元素一条实验记录
+  包含字段:
+
+    {
+      "experiment_id":   "UUID (全局唯一)",
+      "fault_category":  "stress test | network attack | pod fault | node fault | jvm fault",
+      "fault_type":      "cpu stress | network delay | pod kill | ... (共11种)",
+      "instance_type":   "service | node",
+      "service":         "cartservice | frontend | ...",
+      "instance":        "cartservice | minikube | ...",
+      "source":          "chaos-mesh-stresschaos | ...",
+      "destination":     "cartservice | minikube-node | ...",
+      "start_time":      "2026-06-06T10:01:00Z (UTC ISO 8601)",
+      "end_time":        "2026-06-06T10:11:00Z (UTC ISO 8601)",
+      "repetition":      1-5,
+      "yaml_file":       "deploy/chaos-experiments/07-stress-cpu-cartservice.yaml",
+      "status":          "completed"
+    }
+
+  用途:
+  - 审计轨迹: 完整记录每次实验的 Who/What/When
+  - 数据打标: process_and_label_data.py 读取它来为指标数据打标签
+  - 故障复盘: 追溯某个异常时间点对应哪次实验
+
+8.2 chaos_dataset.csv
+  位置: 项目根目录 (可通过 --output 自定义)
+  格式: 标准 CSV, 首列为 timestamp (UTC ISO 8601)
+  规格:
+
+    行数:  ~6,840 (28.5 小时 / 15秒步长)
+    列数:  82 (80 数据列 + fault_type + target_service)
+    大小:  ~5-10 MB
+
+  列名示例:
+
+    timestamp, frontend&cpu_usage, frontend&mem_usage_mb, ...,
+    cartservice&cpu_usage, ..., system&node_cpu_pct,
+    fault_type, target_service
+
+  数据示例:
+
+    2026-06-06T09:57:15Z,35.91,391.41,...,normal,none
+    2026-06-06T09:57:30Z,37.88,463.69,...,normal,none
+    2026-06-06T10:01:00Z,60.83,348.78,...,cpu_stress,cartservice
+    2026-06-06T10:01:15Z,75.63,458.15,...,cpu_stress,cartservice
+    ...
+
+================================================================================
+9. 使用方法
+================================================================================
+
+9.1 主实验脚本
+
+  # 正式运行 (全量 55 次实验, ~28.4 小时)
+  python run_chaos_experiment.py
+
+  # 自定义 Prometheus 地址
+  python run_chaos_experiment.py --prometheus-url http://10.0.0.5:9090
+
+  # 自定义数据采集精度
+  python run_chaos_experiment.py --step 15s --rate-window 30s
+
+  # 自定义输出文件
+  python run_chaos_experiment.py --output my_dataset.csv
+
+  # 仅注入故障, 跳过数据采集
+  python run_chaos_experiment.py --skip-prometheus
+
+  # 空跑验证 (不执行 kubectl, 生成模拟数据, 倒计时缩短)
+  python run_chaos_experiment.py --dry-run
+
+9.2 快速验证 Demo
+
+  # 单次 CPU 压力注入 + 数据采集 + CSV 导出 (~3 分钟)
+  python chaos_quick_test.py
+
+  # 指定目标服务和持续时间
+  python chaos_quick_test.py --service frontend --duration 180
+
+  # 空跑验证管道 (不执行 kubectl, 模拟数据)
+  python chaos_quick_test.py --dry-run
+
+9.3 数据处理与清洗
+
+  # 从 chaos_metrics/*.json 构建打标数据集
+  python process_and_label_data.py
+
+  # 自定义输入/输出路径
+  python process_and_label_data.py --metrics-dir chaos_metrics \
+                                   --history chaos_history.json \
+                                   --output final_dataset_for_algorithm.csv
+
+9.4 完整工作流
+
+  步骤 1: 启动 JMeter 压测
+  步骤 2: python run_chaos_experiment.py
+          → 等待 ~28.4 小时
+          → 输出: chaos_history.json + chaos_dataset.csv
+  步骤 3: python process_and_label_data.py
+          → 输入: chaos_history.json + chaos_metrics/
+          → 输出: final_dataset_for_algorithm.csv
+  步骤 4: 将 CSV 导入 AIOps 算法进行训练/评估
+
+================================================================================
+10. 关键设计决策
+================================================================================
+
+10.1 为什么全量查询而不是逐实验查询?
+  逐实验查询 (旧版) 每次只查一个服务的一个时间窗口, 产生 55 个碎片 JSON。
+  新版一次性查询全部服务 × 全部时间的完整范围, 直接生成一张连续宽表:
+    - 列之间的时间对齐更准确 (同一次查询, 同一时刻)
+    - 避免碎片 JSON 的合并开销
+    - 正常时段 (冷却期) 的数据也完整保留, 提供丰富的 normal 样本
+
+10.2 为什么用 15s 步长而不是 1s?
+  Prometheus 默认 scrape_interval = 15s。物理上不存在 1 秒级的数据。
+  使用 15s 步长:
+    - 每一行都是 Prometheus 的一次真实抓取, 不做插值/不做合成
+    - CSV 中的值可以直接追溯到 Prometheus 的原始存储
+    - 数据量可控 (~6840 行 vs 102,600 行)
+
+10.3 为什么用 30s rate 窗口?
+  rate() 函数要求至少 2 个抓取点才能计算。15s 步长下, 30s 窗口保证
+  覆盖 2-3 个 scrape, 足够计算瞬时变化率, 同时比 5m 窗口更灵敏。
+
+10.4 为什么前后各扩展 10 分钟?
+  为 AIOps 算法提供充分的正常行为基线 (pure normal 数据)。
+  故障注入前后的正常时段帮助算法学习"正常"和"异常"的边界。
+
+10.5 为什么采用外连接 (Outer Join) 合并?
+  不同 PromQL 查询返回的时间戳可能不完全一致 (秒级漂移)。
+  外连接确保所有时间点都被保留, 不会因某一列缺少某个时间点而丢弃整行。
+
+================================================================================
+文件清单
+================================================================================
+
+  run_chaos_experiment.py       — 主实验脚本 (故障注入 + 数据采集 + 宽表导出)
+  chaos_quick_test.py           — 快速验证 Demo (单次注入 + 采集 + CSV)
+  process_and_label_data.py     — 数据处理脚本 (碎片JSON → 对齐CSV)
+  test_process_pipeline.py      — 数据处理管道集成测试
+  test_chaos_experiment.py      — (可扩展) 主实验脚本测试
+
+  deploy/chaos-experiments/     — 11 个 ChaosMesh YAML 文件
+    ├── 01-pod-failure-checkout.yaml
+    ├── 02-network-corrupt-productcatalog.yaml
+    ├── 03-node-cpu-stress.yaml
+    ├── 04-node-memory-stress.yaml
+    ├── 05-jvm-cpu-recommendation.yaml
+    ├── 06-jvm-latency-recommendation.yaml
+    ├── 07-stress-cpu-cartservice.yaml
+    ├── 08-stress-memory-emailservice.yaml
+    ├── 09-network-delay-cartservice.yaml
+    ├── 10-network-loss-checkout.yaml
+    └── 11-pod-kill-frontend.yaml
+
+  chaos_history.json            — 实验元数据 (55 条故障记录)
+  chaos_dataset.csv             — 最终数据集 (宽表, 带标签)
+
+================================================================================
