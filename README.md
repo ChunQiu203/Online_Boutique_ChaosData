@@ -1,51 +1,102 @@
-# Chaos Engineering — 全自动化故障注入与监控采集
+# Chaos Engineering — 全自动化故障注入流水线
 
-独立的混沌工程实验模块，与微服务部署代码完全解耦。
+---
 
-## 文件说明
-
-| 文件 | 用途 |
-|------|------|
-| `run_chaos_experiment.py` | **主实验脚本** — 5大类11种故障 × 5次重复 = 55次全量实验，自动注入/解除 + Prometheus指标采集 + 宽表CSV导出 |
-| `chaos_quick_test.py` | **快速验证Demo** — 单次CPU压力注入 + 全服务多指标采集 + CSV导出，用于快速验证闭环是否打通 |
-| `process_and_label_data.py` | **数据处理脚本** — 解析Prometheus原始JSON，时间对齐、列名规范化、故障区间打标 |
-| `test_process_pipeline.py` | **管道集成测试** — 用合成数据验证数据处理全流程 |
-| `experiments/` | 11个ChaosMesh YAML定义文件 |
-
-## 快速开始
+## 1. 启动微服务
 
 ```bash
-# 1. 先跑一次快速验证 (3分钟)
+# 启动 Minikube
+minikube start --cpus=4 --memory=8192 --disk-size=40g
+
+# 部署 Online Boutique
+cd online-boutique-course
+skaffold run
+# 或者: kubectl apply -f ./release/kubernetes-manifests.yaml
+
+# 等待全部 Pod 就绪
+kubectl get pods -w
+```
+
+---
+
+## 2. 启动 Prometheus + Grafana
+
+```bash
+# ★ 一键部署 Prometheus + Grafana + 4 个预配置 Dashboard
+cd ..
+bash scripts/setup-grafana.sh
+
+# 或手动步骤:
+kubectl apply -f ./deploy/kubernetes/manifests-monitoring/
+
+# 等待 Pod 就绪
+kubectl get pods -n monitoring -w
+
+# 终端 1: Prometheus 端口转发
+kubectl port-forward -n monitoring svc/prometheus 9090:9090
+
+# 终端 2: Grafana 端口转发
+kubectl port-forward -n monitoring svc/grafana 3000:80
+# 浏览器打开 http://localhost:3000 (admin/prom-operator)
+# 预配置 4 个 Dashboard → Dashboards → Online Boutique 文件夹
+```
+
+📖 详细文档: [docs/GRAFANA_VISUALIZATION_GUIDE.md](../docs/GRAFANA_VISUALIZATION_GUIDE.md)
+
+---
+
+## 3. 启动 Selenium 流量引擎 (前置准备)
+
+```bash
+# 终端 3: 前端端口转发 (Selenium 需要)
+kubectl port-forward deployment/frontend 8080:8080
+
+# 验证前端可达
+curl -s -o /dev/null -w "%{http_code}" http://localhost:8080
+# 应返回: 200
+
+# 安装 Selenium 依赖 (只需一次)
+cd online-boutique-course/test/selenium
+python -m venv .venv
+source .venv/Scripts/activate  # Windows Git Bash
+# source .venv/bin/activate    # Linux/Mac
+pip install -r requirements.txt
+cd ../../chaos-engineering
+```
+
+---
+
+## 4. 运行全自动混沌实验
+
+```bash
+# 安装脚本依赖 (只需一次)
+pip install requests pandas numpy
+
+# 进入混沌工程目录
 cd chaos-engineering
-python chaos_quick_test.py --dry-run    # 空跑，验证管道
-python chaos_quick_test.py              # 正式注入 + 采集
 
-# 2. 跑全量实验 (55次, ~28小时)
-python run_chaos_experiment.py --dry-run   # 空跑，检查YAML和配置
-python run_chaos_experiment.py             # 正式运行
+# ★ 空跑验证 (不执行 kubectl, 倒计时缩短, 生成模拟数据验证管道)
+python run_chaos_with_selenium.py --dry-run
 
-# 3. 数据处理 (可选，主脚本已内置导出)
-python process_and_label_data.py
+# ★ 正式运行 (11种故障 × 5次重复 = 55次实验, 约28小时)
+python run_chaos_with_selenium.py
 ```
 
-## 依赖
+**可选参数：**
 
-```bash
-pip install requests pandas numpy pyyaml
+```
+--skip-selenium          跳过 Selenium, 仅执行故障注入 + 指标采集
+--skip-prometheus        跳过 Prometheus 指标采集和 CSV 导出
+--output my_data.csv     自定义输出 CSV 文件名
+--dry-run                空跑模式
 ```
 
-## 前置条件
+---
 
-- Minikube 集群运行中
-- ChaosMesh 已部署至 `chaos-testing` 命名空间
-- Prometheus 端口转发至 `localhost:9090`
-- JMeter 持续压测流量
+## 5. 输出文件
 
-## 输出
-
-- `chaos_history.json` — 实验元数据（故障类型、起止时间、目标服务）
-- `chaos_dataset.csv` — 全服务 × 多指标 宽表（~6840行 × 82列，带 `fault_type` 标签）
-
-## 完整文档
-
-详见 `CHAOS_EXPERIMENT_DOCS.txt`
+| 文件 | 说明 |
+|------|------|
+| `chaos_history.json` | 55 条实验元数据（故障类型、目标服务、起止时间） |
+| `final_dataset_for_algorithm.csv` | ML 就绪宽表 (~80 列, 15s 间隔, 带 fault_type 标签) |
+| `selenium_traffic.log` | Selenium 后台流量引擎运行日志 |
