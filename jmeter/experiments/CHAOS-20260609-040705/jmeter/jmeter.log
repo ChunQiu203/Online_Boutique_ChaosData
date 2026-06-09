@@ -1,0 +1,106 @@
+2026-06-09 04:07:07,025 INFO o.a.j.u.JMeterUtils: Setting Locale to en_EN
+2026-06-09 04:07:07,048 INFO o.a.j.JMeter: Loading user properties from: D:\Application\apache-jmeter-5.6.3\bin\user.properties
+2026-06-09 04:07:07,049 INFO o.a.j.JMeter: Loading system properties from: D:\Application\apache-jmeter-5.6.3\bin\system.properties
+2026-06-09 04:07:07,050 INFO o.a.j.JMeter: Setting JMeter property: jmeter_base_dir=E:\OnlineBoutique\Online-Boutique111\chaos-engineering\jmeter
+2026-06-09 04:07:07,050 INFO o.a.j.JMeter: Setting JMeter property: run_id=CHAOS-20260609-040705
+2026-06-09 04:07:07,050 INFO o.a.j.JMeter: Setting JMeter property: scenario=mixed
+2026-06-09 04:07:07,050 INFO o.a.j.JMeter: Setting JMeter property: users=30
+2026-06-09 04:07:07,050 INFO o.a.j.JMeter: Setting JMeter property: duration=3900
+2026-06-09 04:07:07,050 INFO o.a.j.JMeter: Setting JMeter property: rampup=30
+2026-06-09 04:07:07,050 INFO o.a.j.JMeter: Setting JMeter property: protocol=http
+2026-06-09 04:07:07,051 INFO o.a.j.JMeter: Setting JMeter property: host=127.0.0.1
+2026-06-09 04:07:07,051 INFO o.a.j.JMeter: Setting JMeter property: port=8080
+2026-06-09 04:07:07,051 WARN o.a.j.JMeter: Removing JMeter property: base_path
+2026-06-09 04:07:07,051 INFO o.a.j.JMeter: Setting JMeter property: checkout_percent=30
+2026-06-09 04:07:07,051 INFO Creating summariser <summary>
+Created the tree successfully using E:\OnlineBoutique\Online-Boutique111\chaos-engineering\jmeter\online-boutique.jmx
+Starting standalone test @ 2026 Jun 9 04:07:07 CST (1780949227478)
+Waiting for possible Shutdown/StopTestNow/HeapDump/ThreadDump message on port 4445
+Error occurred compiling the tree: - see log file
+java.version=21.0.5
+2026-06-09 04:07:07,058 INFO o.a.j.JMeter: java.vm.name=Java HotSpot(TM) 64-Bit Server VM
+2026-06-09 04:07:07,059 INFO o.a.j.JMeter: os.name=Windows 11
+2026-06-09 04:07:07,059 INFO o.a.j.JMeter: os.arch=amd64
+2026-06-09 04:07:07,059 INFO o.a.j.JMeter: os.version=10.0
+2026-06-09 04:07:07,059 INFO o.a.j.JMeter: file.encoding=UTF-8
+2026-06-09 04:07:07,059 INFO o.a.j.JMeter: java.awt.headless=true
+2026-06-09 04:07:07,059 INFO o.a.j.JMeter: Max memory     =1073741824
+2026-06-09 04:07:07,059 INFO o.a.j.JMeter: Available Processors =20
+2026-06-09 04:07:07,068 INFO o.a.j.JMeter: Default Locale=English (EN)
+2026-06-09 04:07:07,068 INFO o.a.j.JMeter: JMeter  Locale=English (EN)
+2026-06-09 04:07:07,068 INFO o.a.j.JMeter: JMeterHome=D:\Application\apache-jmeter-5.6.3
+2026-06-09 04:07:07,068 INFO o.a.j.JMeter: user.dir  =E:\OnlineBoutique\Online-Boutique111\chaos-engineering
+2026-06-09 04:07:07,068 INFO o.a.j.JMeter: PWD       =E:\OnlineBoutique\Online-Boutique111\chaos-engineering
+2026-06-09 04:07:07,069 INFO o.a.j.JMeter: IP: 26.17.206.94 Name: LAPTOP FullName: LAPTOP
+2026-06-09 04:07:07,098 INFO o.a.j.s.FileServer: Default base='E:\OnlineBoutique\Online-Boutique111\chaos-engineering'
+2026-06-09 04:07:07,099 INFO o.a.j.s.FileServer: Set new base='E:\OnlineBoutique\Online-Boutique111\chaos-engineering\jmeter'
+2026-06-09 04:07:07,269 INFO o.a.j.s.SaveService: Testplan (JMX) version: 2.2. Testlog (JTL) version: 2.2
+2026-06-09 04:07:07,295 INFO o.a.j.s.SaveService: Using SaveService properties version 5.0
+2026-06-09 04:07:07,299 INFO o.a.j.s.SaveService: Using SaveService properties file encoding UTF-8
+2026-06-09 04:07:07,302 INFO o.a.j.s.SaveService: Loading file: E:\OnlineBoutique\Online-Boutique111\chaos-engineering\jmeter\online-boutique.jmx
+2026-06-09 04:07:07,342 INFO o.a.j.p.h.c.CookieManager: Settings: Delete null: true Check: true Allow variable: true Save: false Prefix: COOKIE_
+2026-06-09 04:07:07,344 INFO o.a.j.p.h.c.CacheManager: Will only cache the following methods: [GET]
+2026-06-09 04:07:07,368 INFO o.a.j.p.h.s.HTTPSamplerBase: Parser for text/html is org.apache.jmeter.protocol.http.parser.LagartoBasedHtmlParser
+2026-06-09 04:07:07,368 INFO o.a.j.p.h.s.HTTPSamplerBase: Parser for application/xhtml+xml is org.apache.jmeter.protocol.http.parser.LagartoBasedHtmlParser
+2026-06-09 04:07:07,368 INFO o.a.j.p.h.s.HTTPSamplerBase: Parser for application/xml is org.apache.jmeter.protocol.http.parser.LagartoBasedHtmlParser
+2026-06-09 04:07:07,368 INFO o.a.j.p.h.s.HTTPSamplerBase: Parser for text/xml is org.apache.jmeter.protocol.http.parser.LagartoBasedHtmlParser
+2026-06-09 04:07:07,368 INFO o.a.j.p.h.s.HTTPSamplerBase: Parser for text/vnd.wap.wml is org.apache.jmeter.protocol.http.parser.RegexpHTMLParser
+2026-06-09 04:07:07,368 INFO o.a.j.p.h.s.HTTPSamplerBase: Parser for text/css is org.apache.jmeter.protocol.http.parser.CssParser
+2026-06-09 04:07:07,448 INFO o.a.j.JMeter: Creating summariser <summary>
+2026-06-09 04:07:07,487 INFO o.a.j.e.StandardJMeterEngine: Running the test!
+2026-06-09 04:07:07,488 INFO o.a.j.s.SampleEvent: List of sample_variables: []
+2026-06-09 04:07:07,488 INFO o.a.j.s.SampleEvent: List of sample_variables: []
+2026-06-09 04:07:07,494 INFO o.a.j.e.u.CompoundVariable: Note: Function class names must contain the string: '.functions.'
+2026-06-09 04:07:07,494 INFO o.a.j.e.u.CompoundVariable: Note: Function class names must not contain the string: '.gui.'
+2026-06-09 04:07:07,528 INFO o.a.j.r.ClassFinder: Will scan jar D:\Application\apache-jmeter-5.6.3\lib\ext\jmeter-plugins-webdriver-4.13.0.2.jar with filter ExtendsClassFilter [parents=[interface org.apache.jmeter.functions.Function], inner=false, contains=null, notContains=null]. Consider exposing JMeter plugins via META-INF/services, and add JMeter-Skip-Class-Scanning=true manifest attribute so JMeter can skip classfile scanning
+2026-06-09 04:07:07,543 INFO o.a.j.r.ClassFinder: Will scan jar D:\Application\apache-jmeter-5.6.3\lib\ext\jmeter-plugins-manager-1.12.jar with filter ExtendsClassFilter [parents=[interface org.apache.jmeter.functions.Function], inner=false, contains=null, notContains=null]. Consider exposing JMeter plugins via META-INF/services, and add JMeter-Skip-Class-Scanning=true manifest attribute so JMeter can skip classfile scanning
+2026-06-09 04:07:07,654 ERROR o.a.j.e.StandardJMeterEngine: Error occurred compiling the tree:
+java.lang.RuntimeException: org.apache.jmeter.functions.InvalidVariableException: __groovy called with wrong number of parameters. Actual: 4. Expected: >= 1 and <= 2
+	at org.apache.jmeter.engine.util.ValueTransformer.transform(ValueTransformer.java:37) ~[ApacheJMeter_core.jar:5.6.3]
+	at org.apache.jmeter.engine.util.ValueReplacer.replaceValues(ValueReplacer.java:168) ~[ApacheJMeter_core.jar:5.6.3]
+	at org.apache.jmeter.engine.util.ValueReplacer.replaceValues(ValueReplacer.java:79) ~[ApacheJMeter_core.jar:5.6.3]
+	at org.apache.jmeter.engine.PreCompiler.addNode(PreCompiler.java:88) ~[ApacheJMeter_core.jar:5.6.3]
+	at org.apache.jorphan.collections.HashTree.traverseInto(HashTree.java:1029) ~[jorphan.jar:5.6.3]
+	at org.apache.jorphan.collections.HashTree.traverseInto(HashTree.java:1030) ~[jorphan.jar:5.6.3]
+	at org.apache.jorphan.collections.HashTree.traverseInto(HashTree.java:1030) ~[jorphan.jar:5.6.3]
+	at org.apache.jorphan.collections.HashTree.traverse(HashTree.java:1012) ~[jorphan.jar:5.6.3]
+	at org.apache.jmeter.engine.StandardJMeterEngine.run(StandardJMeterEngine.java:413) ~[ApacheJMeter_core.jar:5.6.3]
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:572) ~[?:?]
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:317) ~[?:?]
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1144) ~[?:?]
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642) ~[?:?]
+	at java.base/java.lang.Thread.run(Thread.java:1583) [?:?]
+Caused by: org.apache.jmeter.functions.InvalidVariableException: __groovy called with wrong number of parameters. Actual: 4. Expected: >= 1 and <= 2
+	at org.apache.jmeter.functions.AbstractFunction.checkParameterCount(AbstractFunction.java:98) ~[ApacheJMeter_core.jar:5.6.3]
+	at org.apache.jmeter.functions.Groovy.setParameters(Groovy.java:142) ~[ApacheJMeter_functions.jar:5.6.3]
+	at org.apache.jmeter.engine.util.FunctionParser.makeFunction(FunctionParser.java:131) ~[ApacheJMeter_core.jar:5.6.3]
+	at org.apache.jmeter.engine.util.FunctionParser.compileString(FunctionParser.java:79) ~[ApacheJMeter_core.jar:5.6.3]
+	at org.apache.jmeter.engine.util.CompoundVariable.setParameters(CompoundVariable.java:184) ~[ApacheJMeter_core.jar:5.6.3]
+	at org.apache.jmeter.engine.util.ReplaceStringWithFunctions.transformValue(ReplaceStringWithFunctions.java:44) ~[ApacheJMeter_core.jar:5.6.3]
+	at org.apache.jmeter.engine.util.ValueTransformer.transform(ValueTransformer.java:35) ~[ApacheJMeter_core.jar:5.6.3]
+	... 13 more
+2026-06-09 04:07:07,663 ERROR o.a.j.u.JMeterUtils: Error occurred compiling the tree: - see log file
+java.lang.RuntimeException: org.apache.jmeter.functions.InvalidVariableException: __groovy called with wrong number of parameters. Actual: 4. Expected: >= 1 and <= 2
+	at org.apache.jmeter.engine.util.ValueTransformer.transform(ValueTransformer.java:37) ~[ApacheJMeter_core.jar:5.6.3]
+	at org.apache.jmeter.engine.util.ValueReplacer.replaceValues(ValueReplacer.java:168) ~[ApacheJMeter_core.jar:5.6.3]
+	at org.apache.jmeter.engine.util.ValueReplacer.replaceValues(ValueReplacer.java:79) ~[ApacheJMeter_core.jar:5.6.3]
+	at org.apache.jmeter.engine.PreCompiler.addNode(PreCompiler.java:88) ~[ApacheJMeter_core.jar:5.6.3]
+	at org.apache.jorphan.collections.HashTree.traverseInto(HashTree.java:1029) ~[jorphan.jar:5.6.3]
+	at org.apache.jorphan.collections.HashTree.traverseInto(HashTree.java:1030) ~[jorphan.jar:5.6.3]
+	at org.apache.jorphan.collections.HashTree.traverseInto(HashTree.java:1030) ~[jorphan.jar:5.6.3]
+	at org.apache.jorphan.collections.HashTree.traverse(HashTree.java:1012) ~[jorphan.jar:5.6.3]
+	at org.apache.jmeter.engine.StandardJMeterEngine.run(StandardJMeterEngine.java:413) ~[ApacheJMeter_core.jar:5.6.3]
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:572) ~[?:?]
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:317) ~[?:?]
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1144) ~[?:?]
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642) ~[?:?]
+	at java.base/java.lang.Thread.run(Thread.java:1583) [?:?]
+Caused by: org.apache.jmeter.functions.InvalidVariableException: __groovy called with wrong number of parameters. Actual: 4. Expected: >= 1 and <= 2
+	at org.apache.jmeter.functions.AbstractFunction.checkParameterCount(AbstractFunction.java:98) ~[ApacheJMeter_core.jar:5.6.3]
+	at org.apache.jmeter.functions.Groovy.setParameters(Groovy.java:142) ~[ApacheJMeter_functions.jar:5.6.3]
+	at org.apache.jmeter.engine.util.FunctionParser.makeFunction(FunctionParser.java:131) ~[ApacheJMeter_core.jar:5.6.3]
+	at org.apache.jmeter.engine.util.FunctionParser.compileString(FunctionParser.java:79) ~[ApacheJMeter_core.jar:5.6.3]
+	at org.apache.jmeter.engine.util.CompoundVariable.setParameters(CompoundVariable.java:184) ~[ApacheJMeter_core.jar:5.6.3]
+	at org.apache.jmeter.engine.util.ReplaceStringWithFunctions.transformValue(ReplaceStringWithFunctions.java:44) ~[ApacheJMeter_core.jar:5.6.3]
+	at org.apache.jmeter.engine.util.ValueTransformer.transform(ValueTransformer.java:35) ~[ApacheJMeter_core.jar:5.6.3]
+	... 13 more

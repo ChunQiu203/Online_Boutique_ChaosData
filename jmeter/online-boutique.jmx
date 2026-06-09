@@ -1,0 +1,814 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jmeterTestPlan version="1.2" properties="5.0" jmeter="5.6.3">
+  <hashTree>
+    <TestPlan guiclass="TestPlanGui" testclass="TestPlan" testname="Online Boutique JMeter Performance Test Plan" enabled="true">
+      <stringProp name="TestPlan.comments">Online Boutique performance scenarios selected by the scenario property.</stringProp>
+      <boolProp name="TestPlan.functional_mode">false</boolProp>
+      <boolProp name="TestPlan.tearDown_on_shutdown">true</boolProp>
+      <boolProp name="TestPlan.serialize_threadgroups">false</boolProp>
+      <elementProp name="TestPlan.user_defined_variables" elementType="Arguments" guiclass="ArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
+        <collectionProp name="Arguments.arguments"/>
+      </elementProp>
+    </TestPlan>
+    <hashTree>
+      <Arguments guiclass="ArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
+        <collectionProp name="Arguments.arguments">
+          <elementProp name="protocol" elementType="Argument"><stringProp name="Argument.name">protocol</stringProp><stringProp name="Argument.value">${__P(protocol,http)}</stringProp><stringProp name="Argument.metadata">=</stringProp></elementProp>
+          <elementProp name="host" elementType="Argument"><stringProp name="Argument.name">host</stringProp><stringProp name="Argument.value">${__P(host,127.0.0.1)}</stringProp><stringProp name="Argument.metadata">=</stringProp></elementProp>
+          <elementProp name="port" elementType="Argument"><stringProp name="Argument.name">port</stringProp><stringProp name="Argument.value">${__P(port,8080)}</stringProp><stringProp name="Argument.metadata">=</stringProp></elementProp>
+          <elementProp name="base_path" elementType="Argument"><stringProp name="Argument.name">base_path</stringProp><stringProp name="Argument.value">${__P(base_path,)}</stringProp><stringProp name="Argument.metadata">=</stringProp></elementProp>
+          <elementProp name="scenario" elementType="Argument"><stringProp name="Argument.name">scenario</stringProp><stringProp name="Argument.value">${__P(scenario,shopping)}</stringProp><stringProp name="Argument.metadata">=</stringProp></elementProp>
+          <elementProp name="users" elementType="Argument"><stringProp name="Argument.name">users</stringProp><stringProp name="Argument.value">${__P(users,1)}</stringProp><stringProp name="Argument.metadata">=</stringProp></elementProp>
+          <elementProp name="rampup" elementType="Argument"><stringProp name="Argument.name">rampup</stringProp><stringProp name="Argument.value">${__P(rampup,1)}</stringProp><stringProp name="Argument.metadata">=</stringProp></elementProp>
+          <elementProp name="duration" elementType="Argument"><stringProp name="Argument.name">duration</stringProp><stringProp name="Argument.value">${__P(duration,60)}</stringProp><stringProp name="Argument.metadata">=</stringProp></elementProp>
+          <elementProp name="run_id" elementType="Argument"><stringProp name="Argument.name">run_id</stringProp><stringProp name="Argument.value">${__P(run_id,LOCAL-UNSET)}</stringProp><stringProp name="Argument.metadata">=</stringProp></elementProp>
+          <elementProp name="checkout_percent" elementType="Argument"><stringProp name="Argument.name">checkout_percent</stringProp><stringProp name="Argument.value">${__P(checkout_percent,30)}</stringProp><stringProp name="Argument.metadata">=</stringProp></elementProp>
+          <elementProp name="currency_percent" elementType="Argument"><stringProp name="Argument.name">currency_percent</stringProp><stringProp name="Argument.value">${__P(currency_percent,20)}</stringProp><stringProp name="Argument.metadata">=</stringProp></elementProp>
+          <elementProp name="review_write_percent" elementType="Argument"><stringProp name="Argument.name">review_write_percent</stringProp><stringProp name="Argument.value">${__P(review_write_percent,10)}</stringProp><stringProp name="Argument.metadata">=</stringProp></elementProp>
+          <elementProp name="think_time_min_ms" elementType="Argument"><stringProp name="Argument.name">think_time_min_ms</stringProp><stringProp name="Argument.value">${__P(think_time_min_ms,1000)}</stringProp><stringProp name="Argument.metadata">=</stringProp></elementProp>
+          <elementProp name="think_time_max_ms" elementType="Argument"><stringProp name="Argument.name">think_time_max_ms</stringProp><stringProp name="Argument.value">${__P(think_time_max_ms,3000)}</stringProp><stringProp name="Argument.metadata">=</stringProp></elementProp>
+          <elementProp name="connect_timeout_ms" elementType="Argument"><stringProp name="Argument.name">connect_timeout_ms</stringProp><stringProp name="Argument.value">${__P(connect_timeout_ms,5000)}</stringProp><stringProp name="Argument.metadata">=</stringProp></elementProp>
+          <elementProp name="response_timeout_ms" elementType="Argument"><stringProp name="Argument.name">response_timeout_ms</stringProp><stringProp name="Argument.value">${__P(response_timeout_ms,15000)}</stringProp><stringProp name="Argument.metadata">=</stringProp></elementProp>
+          <elementProp name="review_rating" elementType="Argument"><stringProp name="Argument.name">review_rating</stringProp><stringProp name="Argument.value">${__P(review_rating,5)}</stringProp><stringProp name="Argument.metadata">=</stringProp></elementProp>
+          <elementProp name="review_user_prefix" elementType="Argument"><stringProp name="Argument.name">review_user_prefix</stringProp><stringProp name="Argument.value">${__P(review_user_prefix,jmeter-user)}</stringProp><stringProp name="Argument.metadata">=</stringProp></elementProp>
+          <elementProp name="review_title_prefix" elementType="Argument"><stringProp name="Argument.name">review_title_prefix</stringProp><stringProp name="Argument.value">${__P(review_title_prefix,jmeter-review)}</stringProp><stringProp name="Argument.metadata">=</stringProp></elementProp>
+          <elementProp name="review_content_prefix" elementType="Argument"><stringProp name="Argument.name">review_content_prefix</stringProp><stringProp name="Argument.value">${__P(review_content_prefix,automated-performance-test)}</stringProp><stringProp name="Argument.metadata">=</stringProp></elementProp>
+          <elementProp name="review_submit_path" elementType="Argument"><stringProp name="Argument.name">review_submit_path</stringProp><stringProp name="Argument.value">${__P(review_submit_path,/reviews)}</stringProp><stringProp name="Argument.metadata">=</stringProp></elementProp>
+          <elementProp name="review_direct_enabled" elementType="Argument"><stringProp name="Argument.name">review_direct_enabled</stringProp><stringProp name="Argument.value">${__P(review_direct_enabled,false)}</stringProp><stringProp name="Argument.metadata">=</stringProp></elementProp>
+          <elementProp name="review_direct_host" elementType="Argument"><stringProp name="Argument.name">review_direct_host</stringProp><stringProp name="Argument.value">${__P(review_direct_host,127.0.0.1)}</stringProp><stringProp name="Argument.metadata">=</stringProp></elementProp>
+          <elementProp name="review_direct_port" elementType="Argument"><stringProp name="Argument.name">review_direct_port</stringProp><stringProp name="Argument.value">${__P(review_direct_port,8081)}</stringProp><stringProp name="Argument.metadata">=</stringProp></elementProp>
+          <elementProp name="review_cleanup_enabled" elementType="Argument"><stringProp name="Argument.name">review_cleanup_enabled</stringProp><stringProp name="Argument.value">${__P(review_cleanup_enabled,false)}</stringProp><stringProp name="Argument.metadata">=</stringProp></elementProp>
+        </collectionProp>
+      </Arguments>
+      <hashTree/>
+
+      <ConfigTestElement guiclass="HttpDefaultsGui" testclass="ConfigTestElement" testname="HTTP Request Defaults" enabled="true">
+        <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="Arguments" enabled="true">
+          <collectionProp name="Arguments.arguments"/>
+        </elementProp>
+        <stringProp name="HTTPSampler.domain">${host}</stringProp>
+        <stringProp name="HTTPSampler.port">${port}</stringProp>
+        <stringProp name="HTTPSampler.protocol">${protocol}</stringProp>
+        <stringProp name="HTTPSampler.contentEncoding">UTF-8</stringProp>
+        <stringProp name="HTTPSampler.connect_timeout">${connect_timeout_ms}</stringProp>
+        <stringProp name="HTTPSampler.response_timeout">${response_timeout_ms}</stringProp>
+      </ConfigTestElement>
+      <hashTree/>
+
+      <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="HTTP Header Manager" enabled="true">
+        <collectionProp name="HeaderManager.headers">
+          <elementProp name="" elementType="Header"><stringProp name="Header.name">User-Agent</stringProp><stringProp name="Header.value">ApacheJMeter OnlineBoutique PerformanceTest</stringProp></elementProp>
+          <elementProp name="" elementType="Header"><stringProp name="Header.name">Accept</stringProp><stringProp name="Header.value">text/html,application/json;q=0.9,*/*;q=0.8</stringProp></elementProp>
+        </collectionProp>
+      </HeaderManager>
+      <hashTree/>
+
+      <CookieManager guiclass="CookiePanel" testclass="CookieManager" testname="HTTP Cookie Manager" enabled="true">
+        <collectionProp name="CookieManager.cookies"/>
+        <boolProp name="CookieManager.clearEachIteration">false</boolProp>
+        <boolProp name="CookieManager.controlledByThreadGroup">false</boolProp>
+      </CookieManager>
+      <hashTree/>
+
+      <CacheManager guiclass="CacheManagerGui" testclass="CacheManager" testname="HTTP Cache Manager" enabled="true">
+        <boolProp name="clearEachIteration">false</boolProp>
+        <boolProp name="useExpires">true</boolProp>
+        <boolProp name="CacheManager.controlledByThread">false</boolProp>
+        <intProp name="maxSize">5000</intProp>
+      </CacheManager>
+      <hashTree/>
+
+      <CSVDataSet guiclass="TestBeanGUI" testclass="CSVDataSet" testname="CSV Products" enabled="true">
+        <stringProp name="delimiter">,</stringProp>
+        <stringProp name="fileEncoding">UTF-8</stringProp>
+        <stringProp name="filename">${__P(jmeter_base_dir,.)}/data/products.csv</stringProp>
+        <boolProp name="ignoreFirstLine">true</boolProp>
+        <boolProp name="quotedData">false</boolProp>
+        <boolProp name="recycle">true</boolProp>
+        <stringProp name="shareMode">shareMode.all</stringProp>
+        <boolProp name="stopThread">false</boolProp>
+        <stringProp name="variableNames">product_id</stringProp>
+      </CSVDataSet>
+      <hashTree/>
+
+      <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="Online Boutique Users" enabled="true">
+        <stringProp name="ThreadGroup.on_sample_error">continue</stringProp>
+        <elementProp name="ThreadGroup.main_controller" elementType="LoopController" guiclass="LoopControlPanel" testclass="LoopController" testname="Loop Controller" enabled="true">
+          <boolProp name="LoopController.continue_forever">true</boolProp>
+          <intProp name="LoopController.loops">-1</intProp>
+        </elementProp>
+        <stringProp name="ThreadGroup.num_threads">${users}</stringProp>
+        <stringProp name="ThreadGroup.ramp_time">${rampup}</stringProp>
+        <boolProp name="ThreadGroup.scheduler">true</boolProp>
+        <stringProp name="ThreadGroup.duration">${duration}</stringProp>
+        <stringProp name="ThreadGroup.delay"></stringProp>
+        <boolProp name="ThreadGroup.same_user_on_next_iteration">true</boolProp>
+      </ThreadGroup>
+      <hashTree>
+        <OnceOnlyController guiclass="OnceOnlyControllerGui" testclass="OnceOnlyController" testname="Once Only Health Check" enabled="true"/>
+        <hashTree>
+          <JSR223PreProcessor guiclass="TestBeanGUI" testclass="JSR223PreProcessor" testname="Compute think_time_range" enabled="true">
+            <stringProp name="scriptLanguage">groovy</stringProp>
+            <stringProp name="cacheKey">compute_think_time_range</stringProp>
+            <stringProp name="script">
+def tmin = (props.get(&apos;think_time_min_ms&apos;,&apos;1000&apos;) as int)
+def tmax = (props.get(&apos;think_time_max_ms&apos;,&apos;3000&apos;) as int)
+vars.put(&apos;think_time_range&apos;, String.valueOf(Math.max(0, tmax - tmin)))
+</stringProp>
+          </JSR223PreProcessor>
+          <hashTree/>
+          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="UTIL_Healthz" enabled="true">
+            <elementProp name="HTTPsampler.Arguments" elementType="Arguments"><collectionProp name="Arguments.arguments"/></elementProp>
+            <stringProp name="HTTPSampler.path">${base_path}/_healthz</stringProp>
+            <stringProp name="HTTPSampler.method">GET</stringProp>
+            <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+            <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+            <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+            <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+          </HTTPSamplerProxy>
+          <hashTree>
+            <ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="Assert health HTTP 200" enabled="true">
+              <collectionProp name="Asserion.test_strings"><stringProp name="200">200</stringProp></collectionProp>
+              <stringProp name="Assertion.test_field">Assertion.response_code</stringProp>
+              <boolProp name="Assertion.assume_success">false</boolProp>
+              <intProp name="Assertion.test_type">8</intProp>
+            </ResponseAssertion>
+            <hashTree/>
+          </hashTree>
+        </hashTree>
+
+        <IfController guiclass="IfControllerPanel" testclass="IfController" testname="If scenario shopping or mixed" enabled="true">
+          <stringProp name="IfController.condition">${__groovy(vars.get('scenario') == 'shopping' || vars.get('scenario') == 'mixed')}</stringProp>
+          <boolProp name="IfController.evaluateAll">false</boolProp>
+          <boolProp name="IfController.useExpression">true</boolProp>
+        </IfController>
+        <hashTree>
+          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="T01_Home" enabled="true">
+            <elementProp name="HTTPsampler.Arguments" elementType="Arguments"><collectionProp name="Arguments.arguments"/></elementProp>
+            <stringProp name="HTTPSampler.path">${base_path}/</stringProp>
+            <stringProp name="HTTPSampler.method">GET</stringProp>
+            <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+            <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+            <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+            <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+          </HTTPSamplerProxy>
+          <hashTree>
+            <ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="Assert T01 HTTP 200" enabled="true"><collectionProp name="Asserion.test_strings"><stringProp name="200">200</stringProp></collectionProp><stringProp name="Assertion.test_field">Assertion.response_code</stringProp><boolProp name="Assertion.assume_success">false</boolProp><intProp name="Assertion.test_type">8</intProp></ResponseAssertion>
+            <hashTree/>
+            <JSR223Assertion guiclass="TestBeanGUI" testclass="JSR223Assertion" testname="Assert T01 page content" enabled="true">
+              <stringProp name="scriptLanguage">groovy</stringProp><stringProp name="parameters"></stringProp><stringProp name="filename"></stringProp><stringProp name="cacheKey">t01_page_content</stringProp>
+              <stringProp name="script"><![CDATA[
+def body = prev.getResponseDataAsString()
+def missing = []
+if (!body?.trim()) missing << 'non-empty response'
+if (!body.contains('Hot Products')) missing << 'Hot Products'
+if (body.contains('Something has failed') || body.contains('Uh, oh!')) missing << 'not error template'
+if (missing) {
+    AssertionResult.setFailure(true)
+    AssertionResult.setFailureMessage('Page content assertion failed: T01 missing ' + missing.join(', '))
+}
+]]></stringProp>
+            </JSR223Assertion>
+            <hashTree/>
+          </hashTree>
+
+          <UniformRandomTimer guiclass="UniformRandomTimerGui" testclass="UniformRandomTimer" testname="Think Time" enabled="true">
+            <stringProp name="ConstantTimer.delay">${think_time_min_ms}</stringProp>
+            <stringProp name="RandomTimer.range">${think_time_range}</stringProp>
+          </UniformRandomTimer>
+          <hashTree/>
+
+          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="T02_Product_Detail_With_Reviews" enabled="true">
+            <elementProp name="HTTPsampler.Arguments" elementType="Arguments"><collectionProp name="Arguments.arguments"/></elementProp>
+            <stringProp name="HTTPSampler.path">${product_detail_path}</stringProp>
+            <stringProp name="HTTPSampler.method">GET</stringProp>
+            <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+            <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+            <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+            <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+          </HTTPSamplerProxy>
+          <hashTree>
+            <JSR223PreProcessor guiclass="TestBeanGUI" testclass="JSR223PreProcessor" testname="Prepare product and review paths" enabled="true">
+              <stringProp name="scriptLanguage">groovy</stringProp><stringProp name="parameters"></stringProp><stringProp name="filename"></stringProp><stringProp name="cacheKey">prepare_paths</stringProp>
+              <stringProp name="script"><![CDATA[
+def joinPath = { b, p ->
+    b = b ?: ''
+    p = p ?: ''
+    if (!b) return p
+    if (b.endsWith('/') && p.startsWith('/')) return b.substring(0, b.length() - 1) + p
+    if (!b.endsWith('/') && !p.startsWith('/')) return b + '/' + p
+    return b + p
+}
+def productId = vars.get('product_id') ?: 'OLJCESPC7Z'
+def productTemplate = props.get('product_detail_path_template', '/product/${product_id}')
+def reviewTemplate = props.get('review_fragment_path_template', '/reviews/${product_id}')
+vars.put('product_detail_path', joinPath(vars.get('base_path'), productTemplate.replace('${product_id}', productId)))
+vars.put('review_fragment_path', joinPath(vars.get('base_path'), reviewTemplate.replace('${product_id}', productId)))
+]]></stringProp>
+            </JSR223PreProcessor>
+            <hashTree/>
+            <ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="Assert T02 HTTP 200" enabled="true"><collectionProp name="Asserion.test_strings"><stringProp name="200">200</stringProp></collectionProp><stringProp name="Assertion.test_field">Assertion.response_code</stringProp><boolProp name="Assertion.assume_success">false</boolProp><intProp name="Assertion.test_type">8</intProp></ResponseAssertion>
+            <hashTree/>
+            <JSR223Assertion guiclass="TestBeanGUI" testclass="JSR223Assertion" testname="Assert T02 product and review page" enabled="true">
+              <stringProp name="scriptLanguage">groovy</stringProp><stringProp name="parameters"></stringProp><stringProp name="filename"></stringProp><stringProp name="cacheKey">t02_page_content</stringProp>
+              <stringProp name="script"><![CDATA[
+def body = prev.getResponseDataAsString()
+def productId = vars.get('product_id')
+def missing = []
+if (!body.contains('Customer Reviews')) missing << 'Customer Reviews'
+if (!body.contains('Write a Review')) missing << 'Write a Review'
+if (!body.contains('Add To Cart')) missing << 'Add To Cart'
+if (!body.contains(productId)) missing << 'product id ' + productId
+if (body.contains('Something has failed') || body.contains('Uh, oh!')) missing << 'not error template'
+if (missing) {
+    AssertionResult.setFailure(true)
+    AssertionResult.setFailureMessage('Page content assertion failed: T02 missing ' + missing.join(', '))
+}
+]]></stringProp>
+            </JSR223Assertion>
+            <hashTree/>
+          </hashTree>
+
+          <UniformRandomTimer guiclass="UniformRandomTimerGui" testclass="UniformRandomTimer" testname="Think Time" enabled="true">
+            <stringProp name="ConstantTimer.delay">${think_time_min_ms}</stringProp>
+            <stringProp name="RandomTimer.range">${think_time_range}</stringProp>
+          </UniformRandomTimer>
+          <hashTree/>
+
+          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="T03_Add_To_Cart" enabled="true">
+            <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
+              <collectionProp name="Arguments.arguments">
+                <elementProp name="product_id" elementType="HTTPArgument"><boolProp name="HTTPArgument.always_encode">false</boolProp><stringProp name="Argument.value">${product_id}</stringProp><stringProp name="Argument.metadata">=</stringProp><boolProp name="HTTPArgument.use_equals">true</boolProp><stringProp name="Argument.name">product_id</stringProp></elementProp>
+                <elementProp name="quantity" elementType="HTTPArgument"><boolProp name="HTTPArgument.always_encode">false</boolProp><stringProp name="Argument.value">1</stringProp><stringProp name="Argument.metadata">=</stringProp><boolProp name="HTTPArgument.use_equals">true</boolProp><stringProp name="Argument.name">quantity</stringProp></elementProp>
+              </collectionProp>
+            </elementProp>
+            <stringProp name="HTTPSampler.path">${base_path}/cart</stringProp>
+            <stringProp name="HTTPSampler.method">POST</stringProp>
+            <boolProp name="HTTPSampler.follow_redirects">false</boolProp>
+            <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+            <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+            <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+          </HTTPSamplerProxy>
+          <hashTree>
+            <ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="Assert T03 HTTP 302" enabled="true"><collectionProp name="Asserion.test_strings"><stringProp name="302">302</stringProp></collectionProp><stringProp name="Assertion.test_field">Assertion.response_code</stringProp><boolProp name="Assertion.assume_success">false</boolProp><intProp name="Assertion.test_type">8</intProp></ResponseAssertion>
+            <hashTree/>
+          </hashTree>
+
+          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="T04_View_Cart" enabled="true">
+            <elementProp name="HTTPsampler.Arguments" elementType="Arguments"><collectionProp name="Arguments.arguments"/></elementProp>
+            <stringProp name="HTTPSampler.path">${base_path}/cart</stringProp>
+            <stringProp name="HTTPSampler.method">GET</stringProp>
+            <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+            <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+            <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+            <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+          </HTTPSamplerProxy>
+          <hashTree>
+            <ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="Assert T04 HTTP 200" enabled="true"><collectionProp name="Asserion.test_strings"><stringProp name="200">200</stringProp></collectionProp><stringProp name="Assertion.test_field">Assertion.response_code</stringProp><boolProp name="Assertion.assume_success">false</boolProp><intProp name="Assertion.test_type">8</intProp></ResponseAssertion>
+            <hashTree/>
+            <JSR223Assertion guiclass="TestBeanGUI" testclass="JSR223Assertion" testname="Assert T04 cart content" enabled="true">
+              <stringProp name="scriptLanguage">groovy</stringProp><stringProp name="parameters"></stringProp><stringProp name="filename"></stringProp><stringProp name="cacheKey">t04_cart_content</stringProp>
+              <stringProp name="script"><![CDATA[
+def body = prev.getResponseDataAsString()
+def productId = vars.get('product_id')
+def missing = []
+if (!body.contains('Cart (')) missing << 'Cart ('
+if (!body.contains('SKU #' + productId)) missing << 'SKU #' + productId
+if (!body.contains('Quantity: 1')) missing << 'Quantity: 1'
+if (!body.contains('Total')) missing << 'Total'
+if (body.contains('Your shopping cart is empty!')) missing << 'not empty cart'
+if (missing) {
+    AssertionResult.setFailure(true)
+    AssertionResult.setFailureMessage('Page content assertion failed: T04 missing ' + missing.join(', '))
+}
+]]></stringProp>
+            </JSR223Assertion>
+            <hashTree/>
+          </hashTree>
+
+          <IfController guiclass="IfControllerPanel" testclass="IfController" testname="If currency percent" enabled="true">
+            <stringProp name="IfController.condition">${__groovy(new java.util.Random().nextInt(100) &lt; (vars.get('currency_percent') as int))}</stringProp>
+            <boolProp name="IfController.evaluateAll">false</boolProp>
+            <boolProp name="IfController.useExpression">true</boolProp>
+          </IfController>
+          <hashTree>
+            <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="T05_Change_Currency" enabled="true">
+              <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
+                <collectionProp name="Arguments.arguments">
+                  <elementProp name="currency_code" elementType="HTTPArgument"><boolProp name="HTTPArgument.always_encode">false</boolProp><stringProp name="Argument.value">JPY</stringProp><stringProp name="Argument.metadata">=</stringProp><boolProp name="HTTPArgument.use_equals">true</boolProp><stringProp name="Argument.name">currency_code</stringProp></elementProp>
+                </collectionProp>
+              </elementProp>
+              <stringProp name="HTTPSampler.path">${base_path}/setCurrency</stringProp>
+              <stringProp name="HTTPSampler.method">POST</stringProp>
+              <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+              <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+              <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+              <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+            </HTTPSamplerProxy>
+            <hashTree>
+              <ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="Assert T05 final HTTP 200" enabled="true"><collectionProp name="Asserion.test_strings"><stringProp name="200">200</stringProp></collectionProp><stringProp name="Assertion.test_field">Assertion.response_code</stringProp><boolProp name="Assertion.assume_success">false</boolProp><intProp name="Assertion.test_type">8</intProp></ResponseAssertion>
+              <hashTree/>
+              <JSR223Assertion guiclass="TestBeanGUI" testclass="JSR223Assertion" testname="Assert T05 currency content" enabled="true">
+                <stringProp name="scriptLanguage">groovy</stringProp><stringProp name="parameters"></stringProp><stringProp name="filename"></stringProp><stringProp name="cacheKey">t05_currency_content</stringProp>
+                <stringProp name="script"><![CDATA[
+def body = prev.getResponseDataAsString()
+if (!body.contains('JPY') || !body.contains('Hot Products')) {
+    AssertionResult.setFailure(true)
+    AssertionResult.setFailureMessage('Page content assertion failed: T05 expected JPY and Hot Products after currency change')
+}
+]]></stringProp>
+              </JSR223Assertion>
+              <hashTree/>
+            </hashTree>
+          </hashTree>
+
+          <IfController guiclass="IfControllerPanel" testclass="IfController" testname="If mixed review write percent" enabled="true">
+            <stringProp name="IfController.condition">${__groovy(vars.get('scenario') == 'mixed' &amp;&amp; new java.util.Random().nextInt(100) &lt; (vars.get('review_write_percent') as int))}</stringProp>
+            <boolProp name="IfController.evaluateAll">false</boolProp>
+            <boolProp name="IfController.useExpression">true</boolProp>
+          </IfController>
+          <hashTree>
+            <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="T06_Submit_Review" enabled="true">
+              <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
+              <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
+                <collectionProp name="Arguments.arguments">
+                  <elementProp name="" elementType="HTTPArgument"><boolProp name="HTTPArgument.always_encode">false</boolProp><stringProp name="Argument.value">{&quot;product_id&quot;:&quot;${product_id}&quot;,&quot;user_name&quot;:&quot;${review_user_name}&quot;,&quot;rating&quot;:${review_rating},&quot;title&quot;:&quot;${review_title}&quot;,&quot;content&quot;:&quot;${review_content}&quot;}</stringProp><stringProp name="Argument.metadata">=</stringProp></elementProp>
+                </collectionProp>
+              </elementProp>
+              <stringProp name="HTTPSampler.path">${base_path}${review_submit_path}</stringProp>
+              <stringProp name="HTTPSampler.method">POST</stringProp>
+              <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+              <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+              <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+              <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+            </HTTPSamplerProxy>
+            <hashTree>
+              <JSR223PreProcessor guiclass="TestBeanGUI" testclass="JSR223PreProcessor" testname="Prepare review data" enabled="true">
+                <stringProp name="scriptLanguage">groovy</stringProp><stringProp name="parameters"></stringProp><stringProp name="filename"></stringProp><stringProp name="cacheKey">prepare_review_data_mixed</stringProp>
+                <stringProp name="script"><![CDATA[
+def runId = vars.get('run_id') ?: props.get('run_id', 'LOCAL')
+def thread = ctx.getThreadNum()
+def uuid = java.util.UUID.randomUUID().toString()
+vars.put('review_user_name', "${vars.get('review_user_prefix')}-${runId}-${thread}")
+vars.put('review_title', "${vars.get('review_title_prefix')}-${runId}-${uuid}")
+vars.put('review_content', "${vars.get('review_content_prefix')}-${runId}-${uuid}")
+]]></stringProp>
+              </JSR223PreProcessor>
+              <hashTree/>
+              <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="JSON Content-Type" enabled="true"><collectionProp name="HeaderManager.headers"><elementProp name="" elementType="Header"><stringProp name="Header.name">Content-Type</stringProp><stringProp name="Header.value">application/json</stringProp></elementProp></collectionProp></HeaderManager>
+              <hashTree/>
+              <ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="Assert T06 HTTP 201" enabled="true"><collectionProp name="Asserion.test_strings"><stringProp name="201">201</stringProp></collectionProp><stringProp name="Assertion.test_field">Assertion.response_code</stringProp><boolProp name="Assertion.assume_success">false</boolProp><intProp name="Assertion.test_type">8</intProp></ResponseAssertion>
+              <hashTree/>
+              <JSONPostProcessor guiclass="JSONPostProcessorGui" testclass="JSONPostProcessor" testname="Extract review_id" enabled="true"><stringProp name="JSONPostProcessor.referenceNames">review_id</stringProp><stringProp name="JSONPostProcessor.jsonPathExprs">$.id</stringProp><stringProp name="JSONPostProcessor.match_numbers">1</stringProp><stringProp name="JSONPostProcessor.defaultValues">NOT_FOUND</stringProp></JSONPostProcessor>
+              <hashTree/>
+              <JSR223Assertion guiclass="TestBeanGUI" testclass="JSR223Assertion" testname="Assert T06 review JSON" enabled="true">
+                <stringProp name="scriptLanguage">groovy</stringProp><stringProp name="parameters"></stringProp><stringProp name="filename"></stringProp><stringProp name="cacheKey">t06_review_json</stringProp>
+                <stringProp name="script"><![CDATA[
+import groovy.json.JsonSlurper
+def body = prev.getResponseDataAsString()
+def json
+try {
+    json = new JsonSlurper().parseText(body)
+} catch (Throwable t) {
+    AssertionResult.setFailure(true)
+    AssertionResult.setFailureMessage('JSON assertion failed: response is not valid JSON: ' + t.message)
+    return
+}
+def errors = []
+if (!json.id) errors << 'id'
+if (json.product_id != vars.get('product_id')) errors << 'product_id'
+if (json.user_name != vars.get('review_user_name')) errors << 'user_name'
+if ((json.rating as Integer) != (vars.get('review_rating') as Integer)) errors << 'rating'
+if (json.title != vars.get('review_title')) errors << 'title'
+if (json.content != vars.get('review_content')) errors << 'content'
+if (!json.created_at) errors << 'created_at'
+if (errors) {
+    AssertionResult.setFailure(true)
+    AssertionResult.setFailureMessage('JSON assertion failed: T06 invalid fields ' + errors.join(', '))
+}
+]]></stringProp>
+              </JSR223Assertion>
+              <hashTree/>
+            </hashTree>
+
+            <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="T07_Verify_Review_Fragment" enabled="true">
+              <elementProp name="HTTPsampler.Arguments" elementType="Arguments"><collectionProp name="Arguments.arguments"/></elementProp>
+              <stringProp name="HTTPSampler.path">${review_fragment_path}</stringProp>
+              <stringProp name="HTTPSampler.method">GET</stringProp>
+              <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+              <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+              <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+              <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+            </HTTPSamplerProxy>
+            <hashTree>
+              <ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="Assert T07 HTTP 200" enabled="true"><collectionProp name="Asserion.test_strings"><stringProp name="200">200</stringProp></collectionProp><stringProp name="Assertion.test_field">Assertion.response_code</stringProp><boolProp name="Assertion.assume_success">false</boolProp><intProp name="Assertion.test_type">8</intProp></ResponseAssertion>
+              <hashTree/>
+              <JSR223Assertion guiclass="TestBeanGUI" testclass="JSR223Assertion" testname="Assert T07 review fragment" enabled="true">
+                <stringProp name="scriptLanguage">groovy</stringProp><stringProp name="parameters"></stringProp><stringProp name="filename"></stringProp><stringProp name="cacheKey">t07_review_fragment</stringProp>
+                <stringProp name="script"><![CDATA[
+def body = prev.getResponseDataAsString()
+def missing = []
+if (!body.contains(vars.get('review_title'))) missing << 'review_title'
+if (!body.contains(vars.get('review_user_name'))) missing << 'review_user_name'
+if (!body.contains(vars.get('review_content'))) missing << 'review_content'
+if (missing) {
+    AssertionResult.setFailure(true)
+    AssertionResult.setFailureMessage('Page content assertion failed: T07 missing ' + missing.join(', '))
+}
+]]></stringProp>
+              </JSR223Assertion>
+              <hashTree/>
+            </hashTree>
+
+            <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="T08_Verify_Review_Product_Page" enabled="true">
+              <elementProp name="HTTPsampler.Arguments" elementType="Arguments"><collectionProp name="Arguments.arguments"/></elementProp>
+              <stringProp name="HTTPSampler.path">${product_detail_path}</stringProp>
+              <stringProp name="HTTPSampler.method">GET</stringProp>
+              <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+              <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+              <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+              <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+            </HTTPSamplerProxy>
+            <hashTree>
+              <ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="Assert T08 HTTP 200" enabled="true"><collectionProp name="Asserion.test_strings"><stringProp name="200">200</stringProp></collectionProp><stringProp name="Assertion.test_field">Assertion.response_code</stringProp><boolProp name="Assertion.assume_success">false</boolProp><intProp name="Assertion.test_type">8</intProp></ResponseAssertion>
+              <hashTree/>
+              <JSR223Assertion guiclass="TestBeanGUI" testclass="JSR223Assertion" testname="Assert T08 review product page" enabled="true">
+                <stringProp name="scriptLanguage">groovy</stringProp><stringProp name="parameters"></stringProp><stringProp name="filename"></stringProp><stringProp name="cacheKey">t08_review_product_page</stringProp>
+                <stringProp name="script"><![CDATA[
+def body = prev.getResponseDataAsString()
+def missing = []
+if (!body.contains('Customer Reviews')) missing << 'Customer Reviews'
+if (!body.contains(vars.get('review_title'))) missing << 'review_title'
+if (!body.contains(vars.get('review_user_name'))) missing << 'review_user_name'
+if (!body.contains(vars.get('review_content'))) missing << 'review_content'
+if (missing) {
+    AssertionResult.setFailure(true)
+    AssertionResult.setFailureMessage('Page content assertion failed: T08 missing ' + missing.join(', '))
+}
+]]></stringProp>
+              </JSR223Assertion>
+              <hashTree/>
+            </hashTree>
+
+            <IfController guiclass="IfControllerPanel" testclass="IfController" testname="If cleanup current review" enabled="true">
+              <stringProp name="IfController.condition">${__groovy(vars.get('review_cleanup_enabled').toBoolean() &amp;&amp; vars.get('review_direct_enabled').toBoolean() &amp;&amp; vars.get('review_id') != null &amp;&amp; vars.get('review_id') != 'NOT_FOUND')}</stringProp>
+              <boolProp name="IfController.evaluateAll">false</boolProp>
+              <boolProp name="IfController.useExpression">true</boolProp>
+            </IfController>
+            <hashTree>
+              <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="UTIL_Cleanup_Review" enabled="true">
+                <elementProp name="HTTPsampler.Arguments" elementType="Arguments"><collectionProp name="Arguments.arguments"/></elementProp>
+                <stringProp name="HTTPSampler.domain">${review_direct_host}</stringProp>
+                <stringProp name="HTTPSampler.port">${review_direct_port}</stringProp>
+                <stringProp name="HTTPSampler.protocol">${protocol}</stringProp>
+                <stringProp name="HTTPSampler.path">/reviews/${review_id}</stringProp>
+                <stringProp name="HTTPSampler.method">DELETE</stringProp>
+                <boolProp name="HTTPSampler.follow_redirects">false</boolProp><boolProp name="HTTPSampler.auto_redirects">false</boolProp><boolProp name="HTTPSampler.use_keepalive">true</boolProp><boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+              </HTTPSamplerProxy>
+              <hashTree>
+                <ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="Assert cleanup HTTP 204" enabled="true"><collectionProp name="Asserion.test_strings"><stringProp name="204">204</stringProp></collectionProp><stringProp name="Assertion.test_field">Assertion.response_code</stringProp><boolProp name="Assertion.assume_success">false</boolProp><intProp name="Assertion.test_type">8</intProp></ResponseAssertion>
+                <hashTree/>
+              </hashTree>
+            </hashTree>
+          </hashTree>
+
+          <IfController guiclass="IfControllerPanel" testclass="IfController" testname="If checkout percent" enabled="true">
+            <stringProp name="IfController.condition">${__groovy(new java.util.Random().nextInt(100) &lt; (vars.get('checkout_percent') as int))}</stringProp>
+            <boolProp name="IfController.evaluateAll">false</boolProp>
+            <boolProp name="IfController.useExpression">true</boolProp>
+          </IfController>
+          <hashTree>
+            <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="T09_Checkout" enabled="true">
+              <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
+                <collectionProp name="Arguments.arguments">
+                  <elementProp name="email" elementType="HTTPArgument"><boolProp name="HTTPArgument.always_encode">false</boolProp><stringProp name="Argument.value">${__groovy('jmeter-' + vars.get('run_id') + '-' + ctx.getThreadNum() + '-' + System.currentTimeMillis() + '@example.test')}</stringProp><stringProp name="Argument.metadata">=</stringProp><boolProp name="HTTPArgument.use_equals">true</boolProp><stringProp name="Argument.name">email</stringProp></elementProp>
+                  <elementProp name="street_address" elementType="HTTPArgument"><boolProp name="HTTPArgument.always_encode">false</boolProp><stringProp name="Argument.value">1600 Amphitheatre Parkway</stringProp><stringProp name="Argument.metadata">=</stringProp><boolProp name="HTTPArgument.use_equals">true</boolProp><stringProp name="Argument.name">street_address</stringProp></elementProp>
+                  <elementProp name="zip_code" elementType="HTTPArgument"><boolProp name="HTTPArgument.always_encode">false</boolProp><stringProp name="Argument.value">94043</stringProp><stringProp name="Argument.metadata">=</stringProp><boolProp name="HTTPArgument.use_equals">true</boolProp><stringProp name="Argument.name">zip_code</stringProp></elementProp>
+                  <elementProp name="city" elementType="HTTPArgument"><boolProp name="HTTPArgument.always_encode">false</boolProp><stringProp name="Argument.value">Mountain View</stringProp><stringProp name="Argument.metadata">=</stringProp><boolProp name="HTTPArgument.use_equals">true</boolProp><stringProp name="Argument.name">city</stringProp></elementProp>
+                  <elementProp name="state" elementType="HTTPArgument"><boolProp name="HTTPArgument.always_encode">false</boolProp><stringProp name="Argument.value">CA</stringProp><stringProp name="Argument.metadata">=</stringProp><boolProp name="HTTPArgument.use_equals">true</boolProp><stringProp name="Argument.name">state</stringProp></elementProp>
+                  <elementProp name="country" elementType="HTTPArgument"><boolProp name="HTTPArgument.always_encode">false</boolProp><stringProp name="Argument.value">United States</stringProp><stringProp name="Argument.metadata">=</stringProp><boolProp name="HTTPArgument.use_equals">true</boolProp><stringProp name="Argument.name">country</stringProp></elementProp>
+                  <elementProp name="credit_card_number" elementType="HTTPArgument"><boolProp name="HTTPArgument.always_encode">false</boolProp><stringProp name="Argument.value">4432801561520454</stringProp><stringProp name="Argument.metadata">=</stringProp><boolProp name="HTTPArgument.use_equals">true</boolProp><stringProp name="Argument.name">credit_card_number</stringProp></elementProp>
+                  <elementProp name="credit_card_expiration_month" elementType="HTTPArgument"><boolProp name="HTTPArgument.always_encode">false</boolProp><stringProp name="Argument.value">12</stringProp><stringProp name="Argument.metadata">=</stringProp><boolProp name="HTTPArgument.use_equals">true</boolProp><stringProp name="Argument.name">credit_card_expiration_month</stringProp></elementProp>
+                  <elementProp name="credit_card_expiration_year" elementType="HTTPArgument"><boolProp name="HTTPArgument.always_encode">false</boolProp><stringProp name="Argument.value">${__groovy(java.time.Year.now().value + 1)}</stringProp><stringProp name="Argument.metadata">=</stringProp><boolProp name="HTTPArgument.use_equals">true</boolProp><stringProp name="Argument.name">credit_card_expiration_year</stringProp></elementProp>
+                  <elementProp name="credit_card_cvv" elementType="HTTPArgument"><boolProp name="HTTPArgument.always_encode">false</boolProp><stringProp name="Argument.value">672</stringProp><stringProp name="Argument.metadata">=</stringProp><boolProp name="HTTPArgument.use_equals">true</boolProp><stringProp name="Argument.name">credit_card_cvv</stringProp></elementProp>
+                </collectionProp>
+              </elementProp>
+              <stringProp name="HTTPSampler.path">${base_path}/cart/checkout</stringProp>
+              <stringProp name="HTTPSampler.method">POST</stringProp>
+              <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+              <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+              <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+              <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+            </HTTPSamplerProxy>
+            <hashTree>
+              <ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="Assert T09 HTTP 200" enabled="true"><collectionProp name="Asserion.test_strings"><stringProp name="200">200</stringProp></collectionProp><stringProp name="Assertion.test_field">Assertion.response_code</stringProp><boolProp name="Assertion.assume_success">false</boolProp><intProp name="Assertion.test_type">8</intProp></ResponseAssertion>
+              <hashTree/>
+              <JSR223Assertion guiclass="TestBeanGUI" testclass="JSR223Assertion" testname="Assert T09 checkout content" enabled="true">
+                <stringProp name="scriptLanguage">groovy</stringProp><stringProp name="parameters"></stringProp><stringProp name="filename"></stringProp><stringProp name="cacheKey">t09_checkout_content</stringProp>
+                <stringProp name="script"><![CDATA[
+def body = prev.getResponseDataAsString()
+def missing = []
+if (!body.contains('Your order is complete!')) missing << 'Your order is complete!'
+if (!body.contains('Confirmation #')) missing << 'Confirmation #'
+if (!body.contains('Total Paid')) missing << 'Total Paid'
+if (missing) {
+    AssertionResult.setFailure(true)
+    AssertionResult.setFailureMessage('Page content assertion failed: T09 missing ' + missing.join(', '))
+}
+]]></stringProp>
+              </JSR223Assertion>
+              <hashTree/>
+            </hashTree>
+          </hashTree>
+
+          <UniformRandomTimer guiclass="UniformRandomTimerGui" testclass="UniformRandomTimer" testname="Think Time" enabled="true">
+            <stringProp name="ConstantTimer.delay">${think_time_min_ms}</stringProp>
+            <stringProp name="RandomTimer.range">${think_time_range}</stringProp>
+          </UniformRandomTimer>
+          <hashTree/>
+        </hashTree>
+
+        <IfController guiclass="IfControllerPanel" testclass="IfController" testname="If scenario review-read" enabled="true">
+          <stringProp name="IfController.condition">${__groovy(vars.get('scenario') == 'review-read')}</stringProp>
+          <boolProp name="IfController.evaluateAll">false</boolProp>
+          <boolProp name="IfController.useExpression">true</boolProp>
+        </IfController>
+        <hashTree>
+          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="T01_Home" enabled="true">
+            <elementProp name="HTTPsampler.Arguments" elementType="Arguments"><collectionProp name="Arguments.arguments"/></elementProp>
+            <stringProp name="HTTPSampler.path">${base_path}/</stringProp>
+            <stringProp name="HTTPSampler.method">GET</stringProp>
+            <boolProp name="HTTPSampler.follow_redirects">true</boolProp><boolProp name="HTTPSampler.auto_redirects">false</boolProp><boolProp name="HTTPSampler.use_keepalive">true</boolProp><boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+          </HTTPSamplerProxy>
+          <hashTree>
+            <ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="Assert T01 read HTTP 200" enabled="true"><collectionProp name="Asserion.test_strings"><stringProp name="200">200</stringProp></collectionProp><stringProp name="Assertion.test_field">Assertion.response_code</stringProp><boolProp name="Assertion.assume_success">false</boolProp><intProp name="Assertion.test_type">8</intProp></ResponseAssertion>
+            <hashTree/>
+          </hashTree>
+
+          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="T02_Product_Detail_With_Reviews" enabled="true">
+            <elementProp name="HTTPsampler.Arguments" elementType="Arguments"><collectionProp name="Arguments.arguments"/></elementProp>
+            <stringProp name="HTTPSampler.path">${product_detail_path}</stringProp>
+            <stringProp name="HTTPSampler.method">GET</stringProp>
+            <boolProp name="HTTPSampler.follow_redirects">true</boolProp><boolProp name="HTTPSampler.auto_redirects">false</boolProp><boolProp name="HTTPSampler.use_keepalive">true</boolProp><boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+          </HTTPSamplerProxy>
+          <hashTree>
+            <JSR223PreProcessor guiclass="TestBeanGUI" testclass="JSR223PreProcessor" testname="Prepare read paths" enabled="true">
+              <stringProp name="scriptLanguage">groovy</stringProp><stringProp name="parameters"></stringProp><stringProp name="filename"></stringProp><stringProp name="cacheKey">prepare_read_paths</stringProp>
+              <stringProp name="script"><![CDATA[
+def basePath = vars.get('base_path') ?: ''
+def productId = vars.get('product_id') ?: 'OLJCESPC7Z'
+def joinPath = { b, p -> !b ? p : (b.endsWith('/') && p.startsWith('/') ? b.substring(0, b.length() - 1) + p : (!b.endsWith('/') && !p.startsWith('/') ? b + '/' + p : b + p)) }
+vars.put('product_detail_path', joinPath(basePath, props.get('product_detail_path_template', '/product/${product_id}').replace('${product_id}', productId)))
+vars.put('review_fragment_path', joinPath(basePath, props.get('review_fragment_path_template', '/reviews/${product_id}').replace('${product_id}', productId)))
+]]></stringProp>
+            </JSR223PreProcessor>
+            <hashTree/>
+            <ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="Assert T02 read HTTP 200" enabled="true"><collectionProp name="Asserion.test_strings"><stringProp name="200">200</stringProp></collectionProp><stringProp name="Assertion.test_field">Assertion.response_code</stringProp><boolProp name="Assertion.assume_success">false</boolProp><intProp name="Assertion.test_type">8</intProp></ResponseAssertion>
+            <hashTree/>
+            <JSR223Assertion guiclass="TestBeanGUI" testclass="JSR223Assertion" testname="Assert T02 read page" enabled="true">
+              <stringProp name="scriptLanguage">groovy</stringProp><stringProp name="parameters"></stringProp><stringProp name="filename"></stringProp><stringProp name="cacheKey">t02_read_page</stringProp>
+              <stringProp name="script"><![CDATA[
+def body = prev.getResponseDataAsString()
+if (!body.contains('Customer Reviews') || !body.contains('Write a Review') || body.contains('Something has failed') || body.contains('Uh, oh!')) {
+    AssertionResult.setFailure(true)
+    AssertionResult.setFailureMessage('Page content assertion failed: T02 review-read product page missing review area or hit error template')
+}
+]]></stringProp>
+            </JSR223Assertion>
+            <hashTree/>
+          </hashTree>
+
+          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="T07_Verify_Review_Fragment" enabled="true">
+            <elementProp name="HTTPsampler.Arguments" elementType="Arguments"><collectionProp name="Arguments.arguments"/></elementProp>
+            <stringProp name="HTTPSampler.path">${review_fragment_path}</stringProp>
+            <stringProp name="HTTPSampler.method">GET</stringProp>
+            <boolProp name="HTTPSampler.follow_redirects">true</boolProp><boolProp name="HTTPSampler.auto_redirects">false</boolProp><boolProp name="HTTPSampler.use_keepalive">true</boolProp><boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+          </HTTPSamplerProxy>
+          <hashTree>
+            <ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="Assert T07 read HTTP 200" enabled="true"><collectionProp name="Asserion.test_strings"><stringProp name="200">200</stringProp></collectionProp><stringProp name="Assertion.test_field">Assertion.response_code</stringProp><boolProp name="Assertion.assume_success">false</boolProp><intProp name="Assertion.test_type">8</intProp></ResponseAssertion>
+            <hashTree/>
+            <JSR223Assertion guiclass="TestBeanGUI" testclass="JSR223Assertion" testname="Assert T07 read fragment" enabled="true">
+              <stringProp name="scriptLanguage">groovy</stringProp><stringProp name="parameters"></stringProp><stringProp name="filename"></stringProp><stringProp name="cacheKey">t07_read_fragment</stringProp>
+              <stringProp name="script"><![CDATA[
+def body = prev.getResponseDataAsString()
+def ok = body.contains('No reviews yet') || body.contains('review-card') || body.contains('review-title') || body.contains('review-content') || body.contains('Customer Reviews')
+if (!ok) {
+    AssertionResult.setFailure(true)
+    AssertionResult.setFailureMessage('Page content assertion failed: T07 review-read fragment did not contain review markup or empty-state text')
+}
+]]></stringProp>
+            </JSR223Assertion>
+            <hashTree/>
+          </hashTree>
+
+          <UniformRandomTimer guiclass="UniformRandomTimerGui" testclass="UniformRandomTimer" testname="Think Time" enabled="true">
+            <stringProp name="ConstantTimer.delay">${think_time_min_ms}</stringProp>
+            <stringProp name="RandomTimer.range">${think_time_range}</stringProp>
+          </UniformRandomTimer>
+          <hashTree/>
+        </hashTree>
+
+        <IfController guiclass="IfControllerPanel" testclass="IfController" testname="If scenario review-write" enabled="true">
+          <stringProp name="IfController.condition">${__groovy(vars.get('scenario') == 'review-write')}</stringProp>
+          <boolProp name="IfController.evaluateAll">false</boolProp>
+          <boolProp name="IfController.useExpression">true</boolProp>
+        </IfController>
+        <hashTree>
+          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="T02_Product_Detail_With_Reviews" enabled="true">
+            <elementProp name="HTTPsampler.Arguments" elementType="Arguments"><collectionProp name="Arguments.arguments"/></elementProp>
+            <stringProp name="HTTPSampler.path">${product_detail_path}</stringProp>
+            <stringProp name="HTTPSampler.method">GET</stringProp>
+            <boolProp name="HTTPSampler.follow_redirects">true</boolProp><boolProp name="HTTPSampler.auto_redirects">false</boolProp><boolProp name="HTTPSampler.use_keepalive">true</boolProp><boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+          </HTTPSamplerProxy>
+          <hashTree>
+            <JSR223PreProcessor guiclass="TestBeanGUI" testclass="JSR223PreProcessor" testname="Prepare write paths" enabled="true">
+              <stringProp name="scriptLanguage">groovy</stringProp><stringProp name="parameters"></stringProp><stringProp name="filename"></stringProp><stringProp name="cacheKey">prepare_write_paths</stringProp>
+              <stringProp name="script"><![CDATA[
+def basePath = vars.get('base_path') ?: ''
+def productId = vars.get('product_id') ?: 'OLJCESPC7Z'
+def joinPath = { b, p -> !b ? p : (b.endsWith('/') && p.startsWith('/') ? b.substring(0, b.length() - 1) + p : (!b.endsWith('/') && !p.startsWith('/') ? b + '/' + p : b + p)) }
+vars.put('product_detail_path', joinPath(basePath, props.get('product_detail_path_template', '/product/${product_id}').replace('${product_id}', productId)))
+vars.put('review_fragment_path', joinPath(basePath, props.get('review_fragment_path_template', '/reviews/${product_id}').replace('${product_id}', productId)))
+]]></stringProp>
+            </JSR223PreProcessor>
+            <hashTree/>
+            <ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="Assert T02 write HTTP 200" enabled="true"><collectionProp name="Asserion.test_strings"><stringProp name="200">200</stringProp></collectionProp><stringProp name="Assertion.test_field">Assertion.response_code</stringProp><boolProp name="Assertion.assume_success">false</boolProp><intProp name="Assertion.test_type">8</intProp></ResponseAssertion>
+            <hashTree/>
+          </hashTree>
+
+          <IfController guiclass="IfControllerPanel" testclass="IfController" testname="If review write percent" enabled="true">
+            <stringProp name="IfController.condition">${__groovy(new java.util.Random().nextInt(100) &lt; (vars.get('review_write_percent') as int))}</stringProp>
+            <boolProp name="IfController.evaluateAll">false</boolProp>
+            <boolProp name="IfController.useExpression">true</boolProp>
+          </IfController>
+          <hashTree>
+            <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="T06_Submit_Review" enabled="true">
+              <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
+              <elementProp name="HTTPsampler.Arguments" elementType="Arguments"><collectionProp name="Arguments.arguments"><elementProp name="" elementType="HTTPArgument"><boolProp name="HTTPArgument.always_encode">false</boolProp><stringProp name="Argument.value">{&quot;product_id&quot;:&quot;${product_id}&quot;,&quot;user_name&quot;:&quot;${review_user_name}&quot;,&quot;rating&quot;:${review_rating},&quot;title&quot;:&quot;${review_title}&quot;,&quot;content&quot;:&quot;${review_content}&quot;}</stringProp><stringProp name="Argument.metadata">=</stringProp></elementProp></collectionProp></elementProp>
+              <stringProp name="HTTPSampler.path">${base_path}${review_submit_path}</stringProp>
+              <stringProp name="HTTPSampler.method">POST</stringProp>
+              <boolProp name="HTTPSampler.follow_redirects">true</boolProp><boolProp name="HTTPSampler.auto_redirects">false</boolProp><boolProp name="HTTPSampler.use_keepalive">true</boolProp><boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+            </HTTPSamplerProxy>
+            <hashTree>
+              <JSR223PreProcessor guiclass="TestBeanGUI" testclass="JSR223PreProcessor" testname="Prepare review data" enabled="true">
+                <stringProp name="scriptLanguage">groovy</stringProp><stringProp name="parameters"></stringProp><stringProp name="filename"></stringProp><stringProp name="cacheKey">prepare_review_data_write</stringProp>
+                <stringProp name="script"><![CDATA[
+def runId = vars.get('run_id') ?: props.get('run_id', 'LOCAL')
+def thread = ctx.getThreadNum()
+def uuid = java.util.UUID.randomUUID().toString()
+vars.put('review_user_name', "${vars.get('review_user_prefix')}-${runId}-${thread}")
+vars.put('review_title', "${vars.get('review_title_prefix')}-${runId}-${uuid}")
+vars.put('review_content', "${vars.get('review_content_prefix')}-${runId}-${uuid}")
+]]></stringProp>
+              </JSR223PreProcessor>
+              <hashTree/>
+              <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="JSON Content-Type" enabled="true"><collectionProp name="HeaderManager.headers"><elementProp name="" elementType="Header"><stringProp name="Header.name">Content-Type</stringProp><stringProp name="Header.value">application/json</stringProp></elementProp></collectionProp></HeaderManager>
+              <hashTree/>
+              <ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="Assert T06 write HTTP 201" enabled="true"><collectionProp name="Asserion.test_strings"><stringProp name="201">201</stringProp></collectionProp><stringProp name="Assertion.test_field">Assertion.response_code</stringProp><boolProp name="Assertion.assume_success">false</boolProp><intProp name="Assertion.test_type">8</intProp></ResponseAssertion>
+              <hashTree/>
+              <JSONPostProcessor guiclass="JSONPostProcessorGui" testclass="JSONPostProcessor" testname="Extract review_id" enabled="true"><stringProp name="JSONPostProcessor.referenceNames">review_id</stringProp><stringProp name="JSONPostProcessor.jsonPathExprs">$.id</stringProp><stringProp name="JSONPostProcessor.match_numbers">1</stringProp><stringProp name="JSONPostProcessor.defaultValues">NOT_FOUND</stringProp></JSONPostProcessor>
+              <hashTree/>
+              <JSR223Assertion guiclass="TestBeanGUI" testclass="JSR223Assertion" testname="Assert T06 write JSON" enabled="true">
+                <stringProp name="scriptLanguage">groovy</stringProp><stringProp name="parameters"></stringProp><stringProp name="filename"></stringProp><stringProp name="cacheKey">t06_write_json</stringProp>
+                <stringProp name="script"><![CDATA[
+import groovy.json.JsonSlurper
+def json
+try { json = new JsonSlurper().parseText(prev.getResponseDataAsString()) } catch (Throwable t) {
+    AssertionResult.setFailure(true)
+    AssertionResult.setFailureMessage('JSON assertion failed: response is not valid JSON: ' + t.message)
+    return
+}
+def errors = []
+if (!json.id) errors << 'id'
+if (json.product_id != vars.get('product_id')) errors << 'product_id'
+if (json.user_name != vars.get('review_user_name')) errors << 'user_name'
+if ((json.rating as Integer) != (vars.get('review_rating') as Integer)) errors << 'rating'
+if (json.title != vars.get('review_title')) errors << 'title'
+if (json.content != vars.get('review_content')) errors << 'content'
+if (!json.created_at) errors << 'created_at'
+if (errors) {
+    AssertionResult.setFailure(true)
+    AssertionResult.setFailureMessage('JSON assertion failed: T06 invalid fields ' + errors.join(', '))
+}
+]]></stringProp>
+              </JSR223Assertion>
+              <hashTree/>
+            </hashTree>
+
+            <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="T07_Verify_Review_Fragment" enabled="true">
+              <elementProp name="HTTPsampler.Arguments" elementType="Arguments"><collectionProp name="Arguments.arguments"/></elementProp>
+              <stringProp name="HTTPSampler.path">${review_fragment_path}</stringProp>
+              <stringProp name="HTTPSampler.method">GET</stringProp>
+              <boolProp name="HTTPSampler.follow_redirects">true</boolProp><boolProp name="HTTPSampler.auto_redirects">false</boolProp><boolProp name="HTTPSampler.use_keepalive">true</boolProp><boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+            </HTTPSamplerProxy>
+            <hashTree>
+              <ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="Assert T07 write HTTP 200" enabled="true"><collectionProp name="Asserion.test_strings"><stringProp name="200">200</stringProp></collectionProp><stringProp name="Assertion.test_field">Assertion.response_code</stringProp><boolProp name="Assertion.assume_success">false</boolProp><intProp name="Assertion.test_type">8</intProp></ResponseAssertion>
+              <hashTree/>
+              <JSR223Assertion guiclass="TestBeanGUI" testclass="JSR223Assertion" testname="Assert T07 write fragment" enabled="true">
+                <stringProp name="scriptLanguage">groovy</stringProp><stringProp name="parameters"></stringProp><stringProp name="filename"></stringProp><stringProp name="cacheKey">t07_write_fragment</stringProp>
+                <stringProp name="script"><![CDATA[
+def body = prev.getResponseDataAsString()
+def missing = []
+if (!body.contains(vars.get('review_title'))) missing << 'review_title'
+if (!body.contains(vars.get('review_user_name'))) missing << 'review_user_name'
+if (!body.contains(vars.get('review_content'))) missing << 'review_content'
+if (missing) {
+    AssertionResult.setFailure(true)
+    AssertionResult.setFailureMessage('Page content assertion failed: T07 missing ' + missing.join(', '))
+}
+]]></stringProp>
+              </JSR223Assertion>
+              <hashTree/>
+            </hashTree>
+
+            <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="T08_Verify_Review_Product_Page" enabled="true">
+              <elementProp name="HTTPsampler.Arguments" elementType="Arguments"><collectionProp name="Arguments.arguments"/></elementProp>
+              <stringProp name="HTTPSampler.path">${product_detail_path}</stringProp>
+              <stringProp name="HTTPSampler.method">GET</stringProp>
+              <boolProp name="HTTPSampler.follow_redirects">true</boolProp><boolProp name="HTTPSampler.auto_redirects">false</boolProp><boolProp name="HTTPSampler.use_keepalive">true</boolProp><boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+            </HTTPSamplerProxy>
+            <hashTree>
+              <ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="Assert T08 write HTTP 200" enabled="true"><collectionProp name="Asserion.test_strings"><stringProp name="200">200</stringProp></collectionProp><stringProp name="Assertion.test_field">Assertion.response_code</stringProp><boolProp name="Assertion.assume_success">false</boolProp><intProp name="Assertion.test_type">8</intProp></ResponseAssertion>
+              <hashTree/>
+              <JSR223Assertion guiclass="TestBeanGUI" testclass="JSR223Assertion" testname="Assert T08 write product page" enabled="true">
+                <stringProp name="scriptLanguage">groovy</stringProp><stringProp name="parameters"></stringProp><stringProp name="filename"></stringProp><stringProp name="cacheKey">t08_write_product_page</stringProp>
+                <stringProp name="script"><![CDATA[
+def body = prev.getResponseDataAsString()
+def missing = []
+if (!body.contains('Customer Reviews')) missing << 'Customer Reviews'
+if (!body.contains(vars.get('review_title'))) missing << 'review_title'
+if (!body.contains(vars.get('review_user_name'))) missing << 'review_user_name'
+if (!body.contains(vars.get('review_content'))) missing << 'review_content'
+if (missing) {
+    AssertionResult.setFailure(true)
+    AssertionResult.setFailureMessage('Page content assertion failed: T08 missing ' + missing.join(', '))
+}
+]]></stringProp>
+              </JSR223Assertion>
+              <hashTree/>
+            </hashTree>
+
+            <IfController guiclass="IfControllerPanel" testclass="IfController" testname="If cleanup current review" enabled="true">
+              <stringProp name="IfController.condition">${__groovy(vars.get('review_cleanup_enabled').toBoolean() &amp;&amp; vars.get('review_direct_enabled').toBoolean() &amp;&amp; vars.get('review_id') != null &amp;&amp; vars.get('review_id') != 'NOT_FOUND')}</stringProp>
+              <boolProp name="IfController.evaluateAll">false</boolProp>
+              <boolProp name="IfController.useExpression">true</boolProp>
+            </IfController>
+            <hashTree>
+              <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="UTIL_Cleanup_Review" enabled="true">
+                <elementProp name="HTTPsampler.Arguments" elementType="Arguments"><collectionProp name="Arguments.arguments"/></elementProp>
+                <stringProp name="HTTPSampler.domain">${review_direct_host}</stringProp>
+                <stringProp name="HTTPSampler.port">${review_direct_port}</stringProp>
+                <stringProp name="HTTPSampler.protocol">${protocol}</stringProp>
+                <stringProp name="HTTPSampler.path">/reviews/${review_id}</stringProp>
+                <stringProp name="HTTPSampler.method">DELETE</stringProp>
+                <boolProp name="HTTPSampler.follow_redirects">false</boolProp><boolProp name="HTTPSampler.auto_redirects">false</boolProp><boolProp name="HTTPSampler.use_keepalive">true</boolProp><boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+              </HTTPSamplerProxy>
+              <hashTree>
+                <ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="Assert cleanup HTTP 204" enabled="true"><collectionProp name="Asserion.test_strings"><stringProp name="204">204</stringProp></collectionProp><stringProp name="Assertion.test_field">Assertion.response_code</stringProp><boolProp name="Assertion.assume_success">false</boolProp><intProp name="Assertion.test_type">8</intProp></ResponseAssertion>
+                <hashTree/>
+              </hashTree>
+            </hashTree>
+          </hashTree>
+
+          <UniformRandomTimer guiclass="UniformRandomTimerGui" testclass="UniformRandomTimer" testname="Think Time" enabled="true">
+            <stringProp name="ConstantTimer.delay">${think_time_min_ms}</stringProp>
+            <stringProp name="RandomTimer.range">${think_time_range}</stringProp>
+          </UniformRandomTimer>
+          <hashTree/>
+        </hashTree>
+
+        <IfController guiclass="IfControllerPanel" testclass="IfController" testname="If scenario review-negative" enabled="true">
+          <stringProp name="IfController.condition">${__groovy(vars.get('scenario') == 'review-negative')}</stringProp>
+          <boolProp name="IfController.evaluateAll">false</boolProp>
+          <boolProp name="IfController.useExpression">true</boolProp>
+        </IfController>
+        <hashTree>
+          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="NEG_Review_Invalid_JSON" enabled="true">
+            <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
+            <elementProp name="HTTPsampler.Arguments" elementType="Arguments"><collectionProp name="Arguments.arguments"><elementProp name="" elementType="HTTPArgument"><boolProp name="HTTPArgument.always_encode">false</boolProp><stringProp name="Argument.value">{&quot;product_id&quot;:</stringProp><stringProp name="Argument.metadata">=</stringProp></elementProp></collectionProp></elementProp>
+            <stringProp name="HTTPSampler.path">${base_path}${review_submit_path}</stringProp><stringProp name="HTTPSampler.method">POST</stringProp><boolProp name="HTTPSampler.follow_redirects">false</boolProp><boolProp name="HTTPSampler.auto_redirects">false</boolProp><boolProp name="HTTPSampler.use_keepalive">true</boolProp><boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+          </HTTPSamplerProxy>
+          <hashTree><HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="JSON Content-Type" enabled="true"><collectionProp name="HeaderManager.headers"><elementProp name="" elementType="Header"><stringProp name="Header.name">Content-Type</stringProp><stringProp name="Header.value">application/json</stringProp></elementProp></collectionProp></HeaderManager><hashTree/><ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="Assert NEG 400" enabled="true"><collectionProp name="Asserion.test_strings"><stringProp name="400">400</stringProp></collectionProp><stringProp name="Assertion.test_field">Assertion.response_code</stringProp><boolProp name="Assertion.assume_success">false</boolProp><intProp name="Assertion.test_type">8</intProp></ResponseAssertion><hashTree/><ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="Assert NEG JSON error" enabled="true"><collectionProp name="Asserion.test_strings"><stringProp name="error">error</stringProp></collectionProp><stringProp name="Assertion.test_field">Assertion.response_data</stringProp><boolProp name="Assertion.assume_success">false</boolProp><intProp name="Assertion.test_type">2</intProp></ResponseAssertion><hashTree/></hashTree>
+
+          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="NEG_Review_Missing_Product" enabled="true"><boolProp name="HTTPSampler.postBodyRaw">true</boolProp><elementProp name="HTTPsampler.Arguments" elementType="Arguments"><collectionProp name="Arguments.arguments"><elementProp name="" elementType="HTTPArgument"><boolProp name="HTTPArgument.always_encode">false</boolProp><stringProp name="Argument.value">{&quot;product_id&quot;:&quot;&quot;,&quot;user_name&quot;:&quot;jmeter-negative&quot;,&quot;rating&quot;:5,&quot;title&quot;:&quot;negative&quot;,&quot;content&quot;:&quot;negative&quot;}</stringProp><stringProp name="Argument.metadata">=</stringProp></elementProp></collectionProp></elementProp><stringProp name="HTTPSampler.path">${base_path}${review_submit_path}</stringProp><stringProp name="HTTPSampler.method">POST</stringProp><boolProp name="HTTPSampler.follow_redirects">false</boolProp><boolProp name="HTTPSampler.auto_redirects">false</boolProp><boolProp name="HTTPSampler.use_keepalive">true</boolProp><boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp></HTTPSamplerProxy>
+          <hashTree><HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="JSON Content-Type" enabled="true"><collectionProp name="HeaderManager.headers"><elementProp name="" elementType="Header"><stringProp name="Header.name">Content-Type</stringProp><stringProp name="Header.value">application/json</stringProp></elementProp></collectionProp></HeaderManager><hashTree/><ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="Assert NEG 400" enabled="true"><collectionProp name="Asserion.test_strings"><stringProp name="400">400</stringProp></collectionProp><stringProp name="Assertion.test_field">Assertion.response_code</stringProp><boolProp name="Assertion.assume_success">false</boolProp><intProp name="Assertion.test_type">8</intProp></ResponseAssertion><hashTree/><ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="Assert NEG error body" enabled="true"><collectionProp name="Asserion.test_strings"><stringProp name="error">error</stringProp></collectionProp><stringProp name="Assertion.test_field">Assertion.response_data</stringProp><boolProp name="Assertion.assume_success">false</boolProp><intProp name="Assertion.test_type">2</intProp></ResponseAssertion><hashTree/></hashTree>
+
+          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="NEG_Review_Missing_User" enabled="true"><boolProp name="HTTPSampler.postBodyRaw">true</boolProp><elementProp name="HTTPsampler.Arguments" elementType="Arguments"><collectionProp name="Arguments.arguments"><elementProp name="" elementType="HTTPArgument"><boolProp name="HTTPArgument.always_encode">false</boolProp><stringProp name="Argument.value">{&quot;product_id&quot;:&quot;${product_id}&quot;,&quot;user_name&quot;:&quot;&quot;,&quot;rating&quot;:5,&quot;title&quot;:&quot;negative&quot;,&quot;content&quot;:&quot;negative&quot;}</stringProp><stringProp name="Argument.metadata">=</stringProp></elementProp></collectionProp></elementProp><stringProp name="HTTPSampler.path">${base_path}${review_submit_path}</stringProp><stringProp name="HTTPSampler.method">POST</stringProp><boolProp name="HTTPSampler.follow_redirects">false</boolProp><boolProp name="HTTPSampler.auto_redirects">false</boolProp><boolProp name="HTTPSampler.use_keepalive">true</boolProp><boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp></HTTPSamplerProxy>
+          <hashTree><HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="JSON Content-Type" enabled="true"><collectionProp name="HeaderManager.headers"><elementProp name="" elementType="Header"><stringProp name="Header.name">Content-Type</stringProp><stringProp name="Header.value">application/json</stringProp></elementProp></collectionProp></HeaderManager><hashTree/><ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="Assert NEG 400" enabled="true"><collectionProp name="Asserion.test_strings"><stringProp name="400">400</stringProp></collectionProp><stringProp name="Assertion.test_field">Assertion.response_code</stringProp><boolProp name="Assertion.assume_success">false</boolProp><intProp name="Assertion.test_type">8</intProp></ResponseAssertion><hashTree/><ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="Assert NEG error body" enabled="true"><collectionProp name="Asserion.test_strings"><stringProp name="error">error</stringProp></collectionProp><stringProp name="Assertion.test_field">Assertion.response_data</stringProp><boolProp name="Assertion.assume_success">false</boolProp><intProp name="Assertion.test_type">2</intProp></ResponseAssertion><hashTree/></hashTree>
+
+          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="NEG_Review_Invalid_Rating_Low" enabled="true"><boolProp name="HTTPSampler.postBodyRaw">true</boolProp><elementProp name="HTTPsampler.Arguments" elementType="Arguments"><collectionProp name="Arguments.arguments"><elementProp name="" elementType="HTTPArgument"><boolProp name="HTTPArgument.always_encode">false</boolProp><stringProp name="Argument.value">{&quot;product_id&quot;:&quot;${product_id}&quot;,&quot;user_name&quot;:&quot;jmeter-negative&quot;,&quot;rating&quot;:0,&quot;title&quot;:&quot;negative&quot;,&quot;content&quot;:&quot;negative&quot;}</stringProp><stringProp name="Argument.metadata">=</stringProp></elementProp></collectionProp></elementProp><stringProp name="HTTPSampler.path">${base_path}${review_submit_path}</stringProp><stringProp name="HTTPSampler.method">POST</stringProp><boolProp name="HTTPSampler.follow_redirects">false</boolProp><boolProp name="HTTPSampler.auto_redirects">false</boolProp><boolProp name="HTTPSampler.use_keepalive">true</boolProp><boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp></HTTPSamplerProxy>
+          <hashTree><HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="JSON Content-Type" enabled="true"><collectionProp name="HeaderManager.headers"><elementProp name="" elementType="Header"><stringProp name="Header.name">Content-Type</stringProp><stringProp name="Header.value">application/json</stringProp></elementProp></collectionProp></HeaderManager><hashTree/><ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="Assert NEG 400" enabled="true"><collectionProp name="Asserion.test_strings"><stringProp name="400">400</stringProp></collectionProp><stringProp name="Assertion.test_field">Assertion.response_code</stringProp><boolProp name="Assertion.assume_success">false</boolProp><intProp name="Assertion.test_type">8</intProp></ResponseAssertion><hashTree/><ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="Assert NEG error body" enabled="true"><collectionProp name="Asserion.test_strings"><stringProp name="error">error</stringProp></collectionProp><stringProp name="Assertion.test_field">Assertion.response_data</stringProp><boolProp name="Assertion.assume_success">false</boolProp><intProp name="Assertion.test_type">2</intProp></ResponseAssertion><hashTree/></hashTree>
+
+          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="NEG_Review_Invalid_Rating_High" enabled="true"><boolProp name="HTTPSampler.postBodyRaw">true</boolProp><elementProp name="HTTPsampler.Arguments" elementType="Arguments"><collectionProp name="Arguments.arguments"><elementProp name="" elementType="HTTPArgument"><boolProp name="HTTPArgument.always_encode">false</boolProp><stringProp name="Argument.value">{&quot;product_id&quot;:&quot;${product_id}&quot;,&quot;user_name&quot;:&quot;jmeter-negative&quot;,&quot;rating&quot;:6,&quot;title&quot;:&quot;negative&quot;,&quot;content&quot;:&quot;negative&quot;}</stringProp><stringProp name="Argument.metadata">=</stringProp></elementProp></collectionProp></elementProp><stringProp name="HTTPSampler.path">${base_path}${review_submit_path}</stringProp><stringProp name="HTTPSampler.method">POST</stringProp><boolProp name="HTTPSampler.follow_redirects">false</boolProp><boolProp name="HTTPSampler.auto_redirects">false</boolProp><boolProp name="HTTPSampler.use_keepalive">true</boolProp><boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp></HTTPSamplerProxy>
+          <hashTree><HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="JSON Content-Type" enabled="true"><collectionProp name="HeaderManager.headers"><elementProp name="" elementType="Header"><stringProp name="Header.name">Content-Type</stringProp><stringProp name="Header.value">application/json</stringProp></elementProp></collectionProp></HeaderManager><hashTree/><ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="Assert NEG 400" enabled="true"><collectionProp name="Asserion.test_strings"><stringProp name="400">400</stringProp></collectionProp><stringProp name="Assertion.test_field">Assertion.response_code</stringProp><boolProp name="Assertion.assume_success">false</boolProp><intProp name="Assertion.test_type">8</intProp></ResponseAssertion><hashTree/><ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="Assert NEG error body" enabled="true"><collectionProp name="Asserion.test_strings"><stringProp name="error">error</stringProp></collectionProp><stringProp name="Assertion.test_field">Assertion.response_data</stringProp><boolProp name="Assertion.assume_success">false</boolProp><intProp name="Assertion.test_type">2</intProp></ResponseAssertion><hashTree/></hashTree>
+
+          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="NEG_Review_Missing_Title" enabled="true"><boolProp name="HTTPSampler.postBodyRaw">true</boolProp><elementProp name="HTTPsampler.Arguments" elementType="Arguments"><collectionProp name="Arguments.arguments"><elementProp name="" elementType="HTTPArgument"><boolProp name="HTTPArgument.always_encode">false</boolProp><stringProp name="Argument.value">{&quot;product_id&quot;:&quot;${product_id}&quot;,&quot;user_name&quot;:&quot;jmeter-negative&quot;,&quot;rating&quot;:5,&quot;title&quot;:&quot;&quot;,&quot;content&quot;:&quot;negative&quot;}</stringProp><stringProp name="Argument.metadata">=</stringProp></elementProp></collectionProp></elementProp><stringProp name="HTTPSampler.path">${base_path}${review_submit_path}</stringProp><stringProp name="HTTPSampler.method">POST</stringProp><boolProp name="HTTPSampler.follow_redirects">false</boolProp><boolProp name="HTTPSampler.auto_redirects">false</boolProp><boolProp name="HTTPSampler.use_keepalive">true</boolProp><boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp></HTTPSamplerProxy>
+          <hashTree><HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="JSON Content-Type" enabled="true"><collectionProp name="HeaderManager.headers"><elementProp name="" elementType="Header"><stringProp name="Header.name">Content-Type</stringProp><stringProp name="Header.value">application/json</stringProp></elementProp></collectionProp></HeaderManager><hashTree/><ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="Assert NEG 400" enabled="true"><collectionProp name="Asserion.test_strings"><stringProp name="400">400</stringProp></collectionProp><stringProp name="Assertion.test_field">Assertion.response_code</stringProp><boolProp name="Assertion.assume_success">false</boolProp><intProp name="Assertion.test_type">8</intProp></ResponseAssertion><hashTree/><ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="Assert NEG error body" enabled="true"><collectionProp name="Asserion.test_strings"><stringProp name="error">error</stringProp></collectionProp><stringProp name="Assertion.test_field">Assertion.response_data</stringProp><boolProp name="Assertion.assume_success">false</boolProp><intProp name="Assertion.test_type">2</intProp></ResponseAssertion><hashTree/></hashTree>
+
+          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="NEG_Review_Missing_Content" enabled="true"><boolProp name="HTTPSampler.postBodyRaw">true</boolProp><elementProp name="HTTPsampler.Arguments" elementType="Arguments"><collectionProp name="Arguments.arguments"><elementProp name="" elementType="HTTPArgument"><boolProp name="HTTPArgument.always_encode">false</boolProp><stringProp name="Argument.value">{&quot;product_id&quot;:&quot;${product_id}&quot;,&quot;user_name&quot;:&quot;jmeter-negative&quot;,&quot;rating&quot;:5,&quot;title&quot;:&quot;negative&quot;,&quot;content&quot;:&quot;&quot;}</stringProp><stringProp name="Argument.metadata">=</stringProp></elementProp></collectionProp></elementProp><stringProp name="HTTPSampler.path">${base_path}${review_submit_path}</stringProp><stringProp name="HTTPSampler.method">POST</stringProp><boolProp name="HTTPSampler.follow_redirects">false</boolProp><boolProp name="HTTPSampler.auto_redirects">false</boolProp><boolProp name="HTTPSampler.use_keepalive">true</boolProp><boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp></HTTPSamplerProxy>
+          <hashTree><HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="JSON Content-Type" enabled="true"><collectionProp name="HeaderManager.headers"><elementProp name="" elementType="Header"><stringProp name="Header.name">Content-Type</stringProp><stringProp name="Header.value">application/json</stringProp></elementProp></collectionProp></HeaderManager><hashTree/><ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="Assert NEG 400" enabled="true"><collectionProp name="Asserion.test_strings"><stringProp name="400">400</stringProp></collectionProp><stringProp name="Assertion.test_field">Assertion.response_code</stringProp><boolProp name="Assertion.assume_success">false</boolProp><intProp name="Assertion.test_type">8</intProp></ResponseAssertion><hashTree/><ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="Assert NEG error body" enabled="true"><collectionProp name="Asserion.test_strings"><stringProp name="error">error</stringProp></collectionProp><stringProp name="Assertion.test_field">Assertion.response_data</stringProp><boolProp name="Assertion.assume_success">false</boolProp><intProp name="Assertion.test_type">2</intProp></ResponseAssertion><hashTree/></hashTree>
+        </hashTree>
+      </hashTree>
+    </hashTree>
+  </hashTree>
+</jmeterTestPlan>

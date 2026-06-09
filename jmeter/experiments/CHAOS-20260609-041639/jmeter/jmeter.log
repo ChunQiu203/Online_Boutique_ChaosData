@@ -1,0 +1,115 @@
+2026-06-09 04:16:40,308 INFO o.a.j.u.JMeterUtils: Setting Locale to en_EN
+2026-06-09 04:16:40,325 INFO o.a.j.JMeter: Loading user properties from: D:\Application\apache-jmeter-5.6.3\bin\user.properties
+2026-06-09 04:16:40,326 INFO o.a.j.JMeter: Loading system properties from: D:\Application\apache-jmeter-5.6.3\bin\system.properties
+2026-06-09 04:16:40,326 INFO o.a.j.JMeter: Setting JMeter property: jmeter_base_dir=E:\OnlineBoutique\Online-Boutique111\chaos-engineering\jmeter
+2026-06-09 04:16:40,326 INFO o.a.j.JMeter: Setting JMeter property: run_id=CHAOS-20260609-041639
+2026-06-09 04:16:40,326 INFO o.a.j.JMeter: Setting JMeter property: scenario=mixed
+2026-06-09 04:16:40,326 INFO o.a.j.JMeter: Setting JMeter property: users=30
+2026-06-09 04:16:40,326 INFO o.a.j.JMeter: Setting JMeter property: duration=10500
+2026-06-09 04:16:40,326 INFO o.a.j.JMeter: Setting JMeter property: rampup=30
+2026-06-09 04:16:40,326 INFO o.a.j.JMeter: Setting JMeter property: protocol=http
+2026-06-09 04:16:40,326 INFO o.a.j.JMeter: Setting JMeter property: host=127.0.0.1
+2026-06-09 04:16:40,326 INFO o.a.j.JMeter: Setting JMeter property: port=8080
+2026-06-09 04:16:40,326 WARN o.a.j.JMeter: Removing JMeter property: base_path
+2026-06-09 04:16:40,326 INFO o.a.j.JMeter: Setting JMeter property: checkout_percent=30
+2026-06-09 04:16:40,326 INFO Creating summariser <summary>
+Created the tree successfully using E:\OnlineBoutique\Online-Boutique111\chaos-engineering\jmeter\online-boutique.jmx
+Starting standalone test @ 2026 Jun 9 04:16:40 CST (1780949800735)
+Waiting for possible Shutdown/StopTestNow/HeapDump/ThreadDump message on port 4445
+summary +     41 in 00:00:19 =    2.2/s Avg:    31 Min:     9 Max:   116 Err:     4 (9.76%) Active: 20 Started: 20 Finished: 0
+summary +    144 in 00:00:30 =    4.8/s Avg:    38 Min:     6 Max:   135 Err:    17 (11.81%) Active: 30 Started: 30 Finished: 0
+summary =    185 in 00:00:49 =    3.8/s Avg:    37 Min:     6 Max:   135 Err:    21 (11.35%)
+summary +    150 in 00:00:30 =    5.0/s Avg:    40 Min:     8 Max:   131 Err:    21 (14.00%) Active: 30 Started: 30 Finished: 0
+summary =    335 in 00:01:19 =    4.2/s Avg:    38 Min:     6 Max:   135 Err:    42 (12.54%)
+summary +    148 in 00:00:30 =    5.0/s Avg:    40 Min:     8 Max:   141 Err:    18 (12.16%) Active: 30 Started: 30 Finished: 0
+summary =    483 in 00:01:49 =    4.4/s Avg:    39 Min:     6 Max:   141 Err:    60 (12.42%)
+summary +    147 in 00:00:30 =    4.9/s Avg:    43 Min:     7 Max:   194 Err:    15 (10.20%) Active: 30 Started: 30 Finished: 0
+summary =    630 in 00:02:19 =    4.5/s Avg:    40 Min:     6 Max:   194 Err:    75 (11.90%)
+summary +    149 in 00:00:30 =    4.9/s Avg:    39 Min:     8 Max:   136 Err:    19 (12.75%) Active: 30 Started: 30 Finished: 0
+summary =    779 in 00:02:49 =    4.6/s Avg:    40 Min:     6 Max:   194 Err:    94 (12.07%)
+^Cne-Boutique111\chaos-engineering'
+2026-06-09 04:16:40,364 INFO o.a.j.s.FileServer: Set new base='E:\OnlineBoutique\Online-Boutique111\chaos-engineering\jmeter'
+2026-06-09 04:16:40,540 INFO o.a.j.s.SaveService: Testplan (JMX) version: 2.2. Testlog (JTL) version: 2.2
+2026-06-09 04:16:40,565 INFO o.a.j.s.SaveService: Using SaveService properties version 5.0
+2026-06-09 04:16:40,570 INFO o.a.j.s.SaveService: Using SaveService properties file encoding UTF-8
+2026-06-09 04:16:40,572 INFO o.a.j.s.SaveService: Loading file: E:\OnlineBoutique\Online-Boutique111\chaos-engineering\jmeter\online-boutique.jmx
+2026-06-09 04:16:40,605 INFO o.a.j.p.h.c.CookieManager: Settings: Delete null: true Check: true Allow variable: true Save: false Prefix: COOKIE_
+2026-06-09 04:16:40,607 INFO o.a.j.p.h.c.CacheManager: Will only cache the following methods: [GET]
+2026-06-09 04:16:40,642 INFO o.a.j.p.h.s.HTTPSamplerBase: Parser for text/html is org.apache.jmeter.protocol.http.parser.LagartoBasedHtmlParser
+2026-06-09 04:16:40,643 INFO o.a.j.p.h.s.HTTPSamplerBase: Parser for application/xhtml+xml is org.apache.jmeter.protocol.http.parser.LagartoBasedHtmlParser
+2026-06-09 04:16:40,643 INFO o.a.j.p.h.s.HTTPSamplerBase: Parser for application/xml is org.apache.jmeter.protocol.http.parser.LagartoBasedHtmlParser
+2026-06-09 04:16:40,643 INFO o.a.j.p.h.s.HTTPSamplerBase: Parser for text/xml is org.apache.jmeter.protocol.http.parser.LagartoBasedHtmlParser
+2026-06-09 04:16:40,643 INFO o.a.j.p.h.s.HTTPSamplerBase: Parser for text/vnd.wap.wml is org.apache.jmeter.protocol.http.parser.RegexpHTMLParser
+2026-06-09 04:16:40,646 INFO o.a.j.p.h.s.HTTPSamplerBase: Parser for text/css is org.apache.jmeter.protocol.http.parser.CssParser
+2026-06-09 04:16:40,706 INFO o.a.j.JMeter: Creating summariser <summary>
+2026-06-09 04:16:40,743 INFO o.a.j.e.StandardJMeterEngine: Running the test!
+2026-06-09 04:16:40,743 INFO o.a.j.s.SampleEvent: List of sample_variables: []
+2026-06-09 04:16:40,744 INFO o.a.j.s.SampleEvent: List of sample_variables: []
+2026-06-09 04:16:40,748 INFO o.a.j.e.u.CompoundVariable: Note: Function class names must contain the string: '.functions.'
+2026-06-09 04:16:40,748 INFO o.a.j.e.u.CompoundVariable: Note: Function class names must not contain the string: '.gui.'
+2026-06-09 04:16:40,781 INFO o.a.j.r.ClassFinder: Will scan jar D:\Application\apache-jmeter-5.6.3\lib\ext\jmeter-plugins-webdriver-4.13.0.2.jar with filter ExtendsClassFilter [parents=[interface org.apache.jmeter.functions.Function], inner=false, contains=null, notContains=null]. Consider exposing JMeter plugins via META-INF/services, and add JMeter-Skip-Class-Scanning=true manifest attribute so JMeter can skip classfile scanning
+2026-06-09 04:16:40,793 INFO o.a.j.r.ClassFinder: Will scan jar D:\Application\apache-jmeter-5.6.3\lib\ext\jmeter-plugins-manager-1.12.jar with filter ExtendsClassFilter [parents=[interface org.apache.jmeter.functions.Function], inner=false, contains=null, notContains=null]. Consider exposing JMeter plugins via META-INF/services, and add JMeter-Skip-Class-Scanning=true manifest attribute so JMeter can skip classfile scanning
+2026-06-09 04:16:41,127 INFO o.a.j.JMeter: Running test (1780949801127)
+2026-06-09 04:16:41,145 INFO o.a.j.e.StandardJMeterEngine: Starting ThreadGroup: 1 : Online Boutique Users
+2026-06-09 04:16:41,145 INFO o.a.j.e.StandardJMeterEngine: Starting 30 threads for group Online Boutique Users.
+2026-06-09 04:16:41,145 INFO o.a.j.e.StandardJMeterEngine: Thread will continue on error
+2026-06-09 04:16:41,146 INFO o.a.j.t.ThreadGroup: Starting thread group... number=1 threads=30 ramp-up=30 delayedStart=false
+2026-06-09 04:16:41,169 INFO o.a.j.t.JMeterThread: Thread started: Online Boutique Users 1-1
+2026-06-09 04:16:41,173 INFO o.a.j.s.FileServer: Stored: E:\OnlineBoutique\Online-Boutique111\chaos-engineering\jmeter/data/products.csv
+2026-06-09 04:16:41,204 INFO o.a.j.t.ThreadGroup: Started thread group number 1
+2026-06-09 04:16:41,205 INFO o.a.j.e.StandardJMeterEngine: All thread groups have been started
+2026-06-09 04:16:42,146 INFO o.a.j.p.h.s.HTTPHCAbstractImpl: Local host = LAPTOP
+2026-06-09 04:16:42,149 INFO o.a.j.p.h.s.HTTPHC4Impl: HTTP request retry count = 0
+2026-06-09 04:16:42,150 INFO o.a.j.s.SampleResult: Note: Sample TimeStamps are START times
+2026-06-09 04:16:42,150 INFO o.a.j.s.SampleResult: sampleresult.default.encoding is set to UTF-8
+2026-06-09 04:16:42,150 INFO o.a.j.s.SampleResult: sampleresult.useNanoTime=true
+2026-06-09 04:16:42,150 INFO o.a.j.s.SampleResult: sampleresult.nanoThreadSleep=5000
+2026-06-09 04:16:42,165 INFO o.a.j.t.JMeterThread: Thread started: Online Boutique Users 1-2
+2026-06-09 04:16:43,158 INFO o.a.j.t.JMeterThread: Thread started: Online Boutique Users 1-3
+2026-06-09 04:16:44,156 INFO o.a.j.t.JMeterThread: Thread started: Online Boutique Users 1-4
+2026-06-09 04:16:45,152 INFO o.a.j.t.JMeterThread: Thread started: Online Boutique Users 1-5
+2026-06-09 04:16:46,152 INFO o.a.j.t.JMeterThread: Thread started: Online Boutique Users 1-6
+2026-06-09 04:16:47,150 INFO o.a.j.t.JMeterThread: Thread started: Online Boutique Users 1-7
+2026-06-09 04:16:48,151 INFO o.a.j.t.JMeterThread: Thread started: Online Boutique Users 1-8
+2026-06-09 04:16:49,150 INFO o.a.j.t.JMeterThread: Thread started: Online Boutique Users 1-9
+2026-06-09 04:16:50,150 INFO o.a.j.t.JMeterThread: Thread started: Online Boutique Users 1-10
+2026-06-09 04:16:51,151 INFO o.a.j.t.JMeterThread: Thread started: Online Boutique Users 1-11
+2026-06-09 04:16:52,149 INFO o.a.j.t.JMeterThread: Thread started: Online Boutique Users 1-12
+2026-06-09 04:16:53,150 INFO o.a.j.t.JMeterThread: Thread started: Online Boutique Users 1-13
+2026-06-09 04:16:54,150 INFO o.a.j.t.JMeterThread: Thread started: Online Boutique Users 1-14
+2026-06-09 04:16:55,157 INFO o.a.j.t.JMeterThread: Thread started: Online Boutique Users 1-15
+2026-06-09 04:16:56,155 INFO o.a.j.t.JMeterThread: Thread started: Online Boutique Users 1-16
+2026-06-09 04:16:57,165 INFO o.a.j.t.JMeterThread: Thread started: Online Boutique Users 1-17
+2026-06-09 04:16:58,163 INFO o.a.j.t.JMeterThread: Thread started: Online Boutique Users 1-18
+2026-06-09 04:16:59,156 INFO o.a.j.t.JMeterThread: Thread started: Online Boutique Users 1-19
+2026-06-09 04:17:00,156 INFO o.a.j.t.JMeterThread: Thread started: Online Boutique Users 1-20
+2026-06-09 04:17:00,177 INFO o.a.j.r.Summariser: summary +     41 in 00:00:19 =    2.2/s Avg:    31 Min:     9 Max:   116 Err:     4 (9.76%) Active: 20 Started: 20 Finished: 0
+2026-06-09 04:17:01,152 INFO o.a.j.t.JMeterThread: Thread started: Online Boutique Users 1-21
+2026-06-09 04:17:02,160 INFO o.a.j.t.JMeterThread: Thread started: Online Boutique Users 1-22
+2026-06-09 04:17:03,160 INFO o.a.j.t.JMeterThread: Thread started: Online Boutique Users 1-23
+2026-06-09 04:17:04,153 INFO o.a.j.t.JMeterThread: Thread started: Online Boutique Users 1-24
+2026-06-09 04:17:05,160 INFO o.a.j.t.JMeterThread: Thread started: Online Boutique Users 1-25
+2026-06-09 04:17:06,152 INFO o.a.j.t.JMeterThread: Thread started: Online Boutique Users 1-26
+2026-06-09 04:17:07,152 INFO o.a.j.t.JMeterThread: Thread started: Online Boutique Users 1-27
+2026-06-09 04:17:08,160 INFO o.a.j.t.JMeterThread: Thread started: Online Boutique Users 1-28
+2026-06-09 04:17:09,160 INFO o.a.j.t.JMeterThread: Thread started: Online Boutique Users 1-29
+2026-06-09 04:17:10,151 INFO o.a.j.t.JMeterThread: Thread started: Online Boutique Users 1-30
+2026-06-09 04:17:30,210 INFO o.a.j.r.Summariser: summary +    144 in 00:00:30 =    4.8/s Avg:    38 Min:     6 Max:   135 Err:    17 (11.81%) Active: 30 Started: 30 Finished: 0
+2026-06-09 04:17:30,211 INFO o.a.j.r.Summariser: summary =    185 in 00:00:49 =    3.8/s Avg:    37 Min:     6 Max:   135 Err:    21 (11.35%)
+2026-06-09 04:17:55,333 WARN o.a.j.p.h.s.HTTPSamplerBase: Existing CookieManager HTTP Cookie Manager superseded by HTTP Cookie Manager
+2026-06-09 04:18:00,406 INFO o.a.j.r.Summariser: summary +    150 in 00:00:30 =    5.0/s Avg:    40 Min:     8 Max:   131 Err:    21 (14.00%) Active: 30 Started: 30 Finished: 0
+2026-06-09 04:18:00,407 INFO o.a.j.r.Summariser: summary =    335 in 00:01:19 =    4.2/s Avg:    38 Min:     6 Max:   135 Err:    42 (12.54%)
+2026-06-09 04:18:30,124 INFO o.a.j.r.Summariser: summary +    148 in 00:00:30 =    5.0/s Avg:    40 Min:     8 Max:   141 Err:    18 (12.16%) Active: 30 Started: 30 Finished: 0
+2026-06-09 04:18:30,124 INFO o.a.j.r.Summariser: summary =    483 in 00:01:49 =    4.4/s Avg:    39 Min:     6 Max:   141 Err:    60 (12.42%)
+2026-06-09 04:18:44,921 WARN o.a.j.p.h.s.HTTPSamplerBase: Existing CookieManager HTTP Cookie Manager superseded by HTTP Cookie Manager
+2026-06-09 04:18:56,009 WARN o.a.j.p.h.s.HTTPSamplerBase: Existing CookieManager HTTP Cookie Manager superseded by HTTP Cookie Manager
+2026-06-09 04:19:00,153 INFO o.a.j.r.Summariser: summary +    147 in 00:00:30 =    4.9/s Avg:    43 Min:     7 Max:   194 Err:    15 (10.20%) Active: 30 Started: 30 Finished: 0
+2026-06-09 04:19:00,154 INFO o.a.j.r.Summariser: summary =    630 in 00:02:19 =    4.5/s Avg:    40 Min:     6 Max:   194 Err:    75 (11.90%)
+2026-06-09 04:19:02,060 WARN o.a.j.p.h.s.HTTPSamplerBase: Existing CookieManager HTTP Cookie Manager superseded by HTTP Cookie Manager
+2026-06-09 04:19:07,643 WARN o.a.j.p.h.s.HTTPSamplerBase: Existing CookieManager HTTP Cookie Manager superseded by HTTP Cookie Manager
+2026-06-09 04:19:16,978 WARN o.a.j.p.h.s.HTTPSamplerBase: Existing CookieManager HTTP Cookie Manager superseded by HTTP Cookie Manager
+2026-06-09 04:19:20,455 WARN o.a.j.p.h.s.HTTPSamplerBase: Existing CookieManager HTTP Cookie Manager superseded by HTTP Cookie Manager
+2026-06-09 04:19:23,093 WARN o.a.j.p.h.s.HTTPSamplerBase: Existing CookieManager HTTP Cookie Manager superseded by HTTP Cookie Manager
+2026-06-09 04:19:30,376 INFO o.a.j.r.Summariser: summary +    149 in 00:00:30 =    4.9/s Avg:    39 Min:     8 Max:   136 Err:    19 (12.75%) Active: 30 Started: 30 Finished: 0
+2026-06-09 04:19:30,377 INFO o.a.j.r.Summariser: summary =    779 in 00:02:49 =    4.6/s Avg:    40 Min:     6 Max:   194 Err:    94 (12.07%)
+2026-06-09 04:19:31,468 WARN o.a.j.p.h.s.HTTPSamplerBase: Existing CookieManager HTTP Cookie Manager superseded by HTTP Cookie Manager

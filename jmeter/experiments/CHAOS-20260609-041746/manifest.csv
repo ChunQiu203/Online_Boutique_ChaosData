@@ -1,0 +1,2 @@
+run_id,scenario,start_utc,end_utc,users,rampup_s,duration_s,host,port,checkout_percent,currency_percent,review_write_percent,target_service,fault_type,fault_parameters,operator
+CHAOS-20260609-041746,mixed,2026-06-08T20:17:46Z,,30,30,10500,127.0.0.1,8080,30,20,10,,,,

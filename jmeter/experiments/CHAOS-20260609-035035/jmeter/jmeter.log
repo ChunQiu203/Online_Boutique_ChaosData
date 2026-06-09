@@ -1,0 +1,8 @@
+=== JMeter Traffic Engine Log ===
+Run ID: CHAOS-20260609-035035
+Started: 2026-06-08T19:50:35Z
+Command: D:\Application\apache-jmeter-5.6.3\bin\jmeter.bat -n -t E:\OnlineBoutique\Online-Boutique111\chaos-engineering\jmeter\online-boutique.jmx -Jjmeter_base_dir=E:\OnlineBoutique\Online-Boutique111\chaos-engineering\jmeter -Jrun_id=CHAOS-20260609-035035 -Jscenario=mixed -Jusers=30 -Jduration=2910 -Jrampup=30 -Jprotocol=http -Jhost=127.0.0.1 -Jport=8080 -Jbase_path= -Jcheckout_percent=30 -Jcurrency_percent=20 -Jreview_write_percent=10 -l E:\OnlineBoutique\Online-Boutique111\chaos-engineering\jmeter\experiments\CHAOS-20260609-035035\jmeter\result.jtl -j E:\OnlineBoutique\Online-Boutique111\chaos-engineering\jmeter\experiments\CHAOS-20260609-035035\jmeter\jmeter.log
+============================================================
+
+errorlevel=143
+请按任意键继续. . . 

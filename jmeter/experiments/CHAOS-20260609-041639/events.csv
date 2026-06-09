@@ -1,0 +1,2 @@
+run_id,event,timestamp_utc,details
+CHAOS-20260609-041639,TEST_START,2026-06-08T20:16:47Z,JMeter mixed 30 users

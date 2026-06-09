@@ -1,0 +1,4 @@
+run_id,event,timestamp_utc,details
+CHAOS-20260609-035035,TEST_START,2026-06-08T19:50:43Z,JMeter mixed 30 users
+CHAOS-20260609-035035,FAULT_START,2026-06-08T19:50:44Z,dns-error → frontend (rep 1/1)
+CHAOS-20260609-035035,FAULT_END,2026-06-08T19:50:46Z,dns-error → frontend (rep 1/1)
