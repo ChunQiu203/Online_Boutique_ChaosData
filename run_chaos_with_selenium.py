@@ -10,7 +10,7 @@
     3. 每种故障可指定 --repeat N 次重复
        生命周期: 静默(60s) → 注入故障(记录 start_time) → 持续(10min) → 解除(记录 end_time) → 冷却(20min)
     3. try...finally + signal/atexit 多层防护，确保 Selenium 无孤儿进程残留
-    4. 实验结束后统一捞取 Prometheus 80 路指标 → outer join → 15s 重采样 → ffill/bfill → 打标 → CSV
+    4. 实验结束后统一捞取 Prometheus 80 路指标 → outer join → 10s 重采样 → ffill/bfill → 打标 → CSV
 
   环境要求:
     - Minikube 集群运行中，Online Boutique 已部署
@@ -1415,7 +1415,7 @@ class ChaosWithSeleniumRunner:
       1. 后台启动 Selenium 流量引擎
       2. 遍历 self.fault_matrix 执行故障注入实验
       3. 优雅关闭 Selenium
-      4. Prometheus 全量指标采集 (80 路) → outer join → 15s 对齐 → 打标 → CSV
+      4. Prometheus 全量指标采集 (80 路) → outer join → 10s 对齐 → 打标 → CSV
     """
 
     def __init__(

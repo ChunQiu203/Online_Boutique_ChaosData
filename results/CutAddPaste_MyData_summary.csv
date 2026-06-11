@@ -1,0 +1,65 @@
+,CutAddPaste0,CutAddPaste1
+Hyper-parameter,"dataset:MyData
+input_channels:80
+kernel_size:8
+stride:1
+final_out_channels:32
+project:2
+dropout:0.45
+features_len:6
+window_size:32
+time_step:16
+num_epoch:100
+beta1:0.9
+beta2:0.99
+lr:0.0003
+weight:0.005
+drop_last:False
+batch_size:512
+trend_rate:0.01
+rate:1
+dim:5
+cut_rate:10
+detect_nu:0.001
+threshold_determine:floating","dataset:MyData
+input_channels:80
+kernel_size:8
+stride:1
+final_out_channels:32
+project:2
+dropout:0.45
+features_len:10
+window_size:64
+time_step:32
+num_epoch:300
+beta1:0.9
+beta2:0.99
+lr:0.0001
+weight:0.0005
+drop_last:False
+batch_size:512
+trend_rate:0.1
+rate:0.6
+dim:10
+cut_rate:12
+detect_nu:0.005
+threshold_determine:floating"
+seed,4,4
+Train Time,0:00:10.270137,0:00:16.110505
+UCR Accuracy,0.0,0.0
+Affiliation Precision,0.61239,0.70276
+Affiliation Recall,1.0,1.0
+Affiliation F1,0.7596,0.82544
+RPA Precision,0.56,0.52381
+RPA Recall,0.42424,1.0
+RPA F1,0.48276,0.6875
+PA Precision,0.47312,0.66292
+PA Recall,1.0,1.0
+PA F1,0.64234,0.7973
+Point-wise Precision,0.47312,0.6413
+Point-wise Recall,1.0,1.0
+Point-wise F1,0.64234,0.78146
+Test ROC-AUC (window),0.49652,0.50026
+NAB Score (balanced),0.40936,0.9415
+NAB Score (high precision),0.39532,0.8915
+NAB Score (high recall),0.41432,0.961

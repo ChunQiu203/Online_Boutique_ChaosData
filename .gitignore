@@ -4,7 +4,7 @@ chaos_dataset.csv
 quick_test_result.csv
 final_dataset_for_algorithm.csv
 chaos_metrics/
-
+report/
 # Python
 __pycache__/
 *.pyc
