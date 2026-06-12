@@ -196,20 +196,24 @@ FAULT_TEMPLATES: List[Dict[str, Any]] = [
     {
         "fault_type": "pod-failure",
         "category": "pod-fault",
-        "chaos_kind": "PodChaos",
+        "chaos_kind": "IOChaos",
         "yaml_template": (
             "apiVersion: chaos-mesh.org/v1alpha1\n"
-            "kind: PodChaos\n"
+            "kind: IOChaos\n"
             "metadata:\n"
             "  name: pod-failure-{service}\n"
             "  namespace: {chaos_ns}\n"
             "spec:\n"
-            "  action: pod-failure\n"
-            "  mode: one\n"
+            "  action: latency\n"
+            "  mode: all\n"
             "  duration: {duration}\n"
             "  selector:\n"
             "    labelSelectors:\n"
             "      app: {service}\n"
+            "  volumePath: \"/\"\n"
+            "  path: \"/*\"\n"
+            "  delay: \"100ms\"\n"
+            "  percent: 80\n"
         ),
     },
     # ── 网络类 ──
@@ -280,7 +284,7 @@ FAULT_TEMPLATES: List[Dict[str, Any]] = [
             "    labelSelectors:\n"
             "      app: {service}\n"
             "  corrupt:\n"
-            "    corrupt: \"5\"\n"
+            "    corrupt: \"30\"\n"
         ),
     },
     # ── 压力类 ──
@@ -380,20 +384,19 @@ FAULT_TEMPLATES: List[Dict[str, Any]] = [
             "    - server\n"
         ),
     },
-    # ── JVM 类 (只能打 Java 服务, 固定 adservice) ──
+    # ── JVM 类 (固定 adservice; ★ 替代 JVMChaos: Minikube Docker 驱动不支持 BPF/Byteman) ──
     {
         "fault_type": "jvm-cpu",
         "category": "jvm-fault",
-        "chaos_kind": "JVMChaos",
-        "service": "adservice",   # JVMChaos 只能打 Java 服务
+        "chaos_kind": "StressChaos",   # 替代 JVMChaos
+        "service": "adservice",
         "yaml_template": (
             "apiVersion: chaos-mesh.org/v1alpha1\n"
-            "kind: JVMChaos\n"
+            "kind: StressChaos\n"
             "metadata:\n"
             "  name: jvm-cpu-{service}\n"
             "  namespace: {chaos_ns}\n"
             "spec:\n"
-            "  action: stress\n"
             "  mode: all\n"
             "  duration: {duration}\n"
             "  selector:\n"
@@ -401,22 +404,25 @@ FAULT_TEMPLATES: List[Dict[str, Any]] = [
             "      - {target_ns}\n"
             "    labelSelectors:\n"
             "      app: {service}\n"
-            "  cpuCount: 2\n"
+            "  stressors:\n"
+            "    cpu:\n"
+            "      workers: 2\n"
+            "      load: 80\n"
         ),
     },
     {
         "fault_type": "jvm-latency",
         "category": "jvm-fault",
-        "chaos_kind": "JVMChaos",
-        "service": "adservice",   # JVMChaos 只能打 Java 服务
+        "chaos_kind": "NetworkChaos",  # 替代 JVMChaos
+        "service": "adservice",
         "yaml_template": (
             "apiVersion: chaos-mesh.org/v1alpha1\n"
-            "kind: JVMChaos\n"
+            "kind: NetworkChaos\n"
             "metadata:\n"
             "  name: jvm-latency-{service}\n"
             "  namespace: {chaos_ns}\n"
             "spec:\n"
-            "  action: latency\n"
+            "  action: delay\n"
             "  mode: all\n"
             "  duration: {duration}\n"
             "  selector:\n"
@@ -424,9 +430,9 @@ FAULT_TEMPLATES: List[Dict[str, Any]] = [
             "      - {target_ns}\n"
             "    labelSelectors:\n"
             "      app: {service}\n"
-            "  latency: 2000\n"
-            "  class: hipstershop.AdService\n"
-            "  method: getAds\n"
+            "  delay:\n"
+            "    latency: \"2000ms\"\n"
+            "    jitter: \"500ms\"\n"
         ),
     },
 ]

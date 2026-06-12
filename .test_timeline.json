@@ -1,0 +1,42 @@
+[
+  {
+    "fault_type": "pod-failure",
+    "service": "adservice",
+    "quiet_start": "2026-06-11T11:49:09Z",
+    "start_time": "2026-06-11T11:50:09Z",
+    "end_time": "2026-06-11T11:52:09Z",
+    "cooldown_end": "2026-06-11T11:53:40Z"
+  },
+  {
+    "fault_type": "network-corrupt",
+    "service": "currencyservice",
+    "quiet_start": "2026-06-11T11:53:40Z",
+    "start_time": "2026-06-11T11:54:40Z",
+    "end_time": "2026-06-11T11:56:41Z",
+    "cooldown_end": "2026-06-11T11:58:11Z"
+  },
+  {
+    "fault_type": "dns-error",
+    "service": "adservice",
+    "quiet_start": "2026-06-11T11:58:11Z",
+    "start_time": "2026-06-11T11:59:11Z",
+    "end_time": "2026-06-11T12:01:12Z",
+    "cooldown_end": "2026-06-11T12:02:42Z"
+  },
+  {
+    "fault_type": "jvm-cpu",
+    "service": "adservice",
+    "quiet_start": "2026-06-11T12:02:43Z",
+    "start_time": "2026-06-11T12:03:43Z",
+    "end_time": "2026-06-11T12:05:43Z",
+    "cooldown_end": "2026-06-11T12:07:13Z"
+  },
+  {
+    "fault_type": "jvm-latency",
+    "service": "adservice",
+    "quiet_start": "2026-06-11T12:07:14Z",
+    "start_time": "2026-06-11T12:08:14Z",
+    "end_time": "2026-06-11T12:10:14Z",
+    "cooldown_end": "2026-06-11T12:11:44Z"
+  }
+]
